@@ -1,0 +1,6 @@
+# ic-gateway
+initramfs.cpio.gz
+linux-image.deb
+OVMF.fd
+rootfs
+vmlinuz

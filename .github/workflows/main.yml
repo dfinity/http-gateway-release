@@ -1,0 +1,42 @@
+name: initramfs
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  initramfs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: create initramfs
+        run: make initramfs
+
+      - name: Shasum for initramfs
+        run: echo "INITRAMFS_SHASUM=$(make shasum | cut -d' ' -f1)" >> $GITHUB_ENV
+
+      - name: Take SEV-SNP measurement
+        run: echo "SEV_SNP_MEASUREMENT=$(make sev-snp-measure)" >> $GITHUB_ENV
+
+      - name: Set short sha
+        run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c -7)" >> $GITHUB_ENV
+
+      - name: release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.SHORT_SHA }}
+          files: |
+            OVMF.fd
+            vmlinuz
+            initramfs.cpio.gz
+          body: |
+            | Name | Value |
+            | ------------- | ------------- |
+            | Local | [${{ github.repository }}:${{ github.sha }}](https://github.com/${{ github.repository }}/tree/${{ github.sha }}) |
+            | INITRAMFS_SHASUM | `${{ env.INITRAMFS_SHASUM }}` |
+            | SEV_SNP_MEASUREMENT | `${{ env.SEV_SNP_MEASUREMENT }}` |
