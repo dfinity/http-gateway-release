@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chpst -uroot /usr/bin/ic-gateway 2>&1
