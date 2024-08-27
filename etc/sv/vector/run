@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Create data dir
+if [ ! -d /var/lib/vector ]; then
+    mkdir -p /var/lib/vector
+fi
+
+exec chpst -uroot /usr/bin/vector 2>&1

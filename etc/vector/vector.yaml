@@ -1,0 +1,12 @@
+sources:
+  service_logs:
+    type: file
+    include:
+      - /var/log/**/current
+
+sinks:
+  stdout:
+    type: "console"
+    inputs: ["service_logs"]
+    encoding:
+      codec: text

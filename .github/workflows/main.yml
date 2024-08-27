@@ -31,8 +31,8 @@ jobs:
         with:
           tag_name: ${{ env.SHORT_SHA }}
           files: |
-            OVMF.fd
-            vmlinuz
+            deps/OVMF.fd
+            deps/vmlinuz
             initramfs.cpio.gz
           body: |
             | Name | Value |
