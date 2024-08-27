@@ -1,0 +1,2 @@
+#!/bin/sh
+exec chpst -uroot /usr/bin/certificate-issuer 2>&1
