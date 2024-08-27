@@ -22,20 +22,33 @@ RUN \
         curl \
         iproute2 \
         kmod \
+        runit \
         udhcpc \
         wget
 
 
 # kernel
 
-COPY linux-image.deb .
+COPY deps/linux-image.deb .
 
 RUN dpkg -i linux-image.deb && rm linux-image.deb
 
 
 # binaries
 
-COPY --chmod=755 ic-gateway /usr/bin/main
+COPY --chmod=755 bin/certificate-issuer /usr/bin/certificate-issuer
+COPY --chmod=755 ic-gateway /usr/bin/ic-gateway
+COPY --chmod=755 bin/vector /usr/bin/vector
+
+
+# vector config
+
+COPY etc/vector /etc/vector
+
+
+# service definitions (runit)
+
+COPY etc/sv /etc/service
 
 
 # init
@@ -46,5 +59,5 @@ COPY --chmod=755 init.sh /init
 RUN \
   --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    : "Clean up for improving reproducibility (optional)" && \
+    : "Clean up for improving reproducibility" && \
     rm -rf /var/log/* /var/cache/ldconfig/aux-cache
