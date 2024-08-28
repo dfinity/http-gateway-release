@@ -11,5 +11,8 @@ udhcpc -i eth0
 # mount certificates for ic-gateway
 mkdir /mnt/certs && mount /dev/sda /mnt/certs
 
+# mount configuration for certificate-issuer
+mkdir /mnt/cert-issuer && mount /dev/sdb /mnt/cert-issuer
+
 # Start init
 exec runsvdir -P /etc/service
