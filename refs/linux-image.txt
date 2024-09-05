@@ -1,1 +1,1 @@
-https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-1e02b82/linux-image-6.9.0-snp-guest-a38297e_6.9.0-1_amd64.deb
+https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-ed14592/linux-image-6.10.0-snp-guest-0c38364_6.10.0-1_amd64.deb

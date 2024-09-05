@@ -1,1 +1,1 @@
-https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-1e02b82/vmlinuz-6.9.0-snp-guest-a38297e
+https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-ed14592/vmlinuz-6.10.0-snp-guest-0c38364
