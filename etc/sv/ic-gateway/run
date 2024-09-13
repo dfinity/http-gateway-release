@@ -5,6 +5,6 @@ exec chpst -uroot /usr/bin/ic-gateway \
     --http-server-listen-plain '0.0.0.0:80' \
     --http-server-listen-tls '0.0.0.0:443' \
     --ic-url https://ic0.app \
-    --domain icp5.io \
+    --domain icp4.io --domain icp5.io --domain gateway.dfinity.network \
     --domain-canister-alias 'valid:qoctq-giaaa-aaaaa-aaaea-cai,invalid:qoctq-giaaa-aaaaa-aaaea-cai' \
     --cert-provider-dir /mnt/certs
