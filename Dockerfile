@@ -23,6 +23,7 @@ RUN \
         iproute2 \
         kmod \
         runit \
+        nftables \
         udhcpc \
         wget
 
@@ -44,6 +45,11 @@ COPY --chmod=755 bin/vector /usr/bin/vector
 # vector config
 
 COPY etc/vector /etc/vector
+
+
+# firewall rules
+
+COPY etc/nftables.conf /etc/nftables.conf
 
 
 # service definitions (runit)

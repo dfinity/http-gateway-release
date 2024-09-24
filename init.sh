@@ -8,6 +8,9 @@ mount -t sysfs sysfs /sys
 ip link set eth0 up
 udhcpc -i eth0
 
+# Configure firewall
+nft -f /etc/nftables.conf
+
 # mount certificates for ic-gateway
 mkdir /mnt/certs && mount /dev/sda /mnt/certs
 
