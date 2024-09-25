@@ -24,6 +24,7 @@ RUN \
         iproute2 \
         kmod \
         nftables \
+        procps \
         runit \
         udhcpc \
         wget
@@ -51,6 +52,10 @@ COPY etc/vector /etc/vector
 
 COPY etc/crowdsec /etc/crowdsec
 COPY etc/nftables.conf /etc/nftables.conf
+
+
+# network tweaks
+COPY etc/sysctl.d /etc/sysctl.d
 
 
 # service definitions (runit)

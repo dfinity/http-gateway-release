@@ -11,6 +11,9 @@ udhcpc -i eth0
 # Configure firewall
 nft -f /etc/nftables.conf
 
+# Configure sysctl
+sysctl -p /etc/sysctl.d/local.conf
+
 mnts=(
   "/dev/sda /mnt/certs"       # ic-gateway certificates
   "/dev/sdb /mnt/cert-issuer" # certificate-issuer configuration
