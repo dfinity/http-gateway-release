@@ -19,14 +19,14 @@ RUN \
     apt install --update --snapshot "${SNAPSHOT}" -o Acquire::Check-Valid-Until=false -o Acquire::https::Verify-Peer=false -y ca-certificates && \
     : "Install dependencies" && \
     apt install --snapshot "${SNAPSHOT}" -y \
+        crowdsec-firewall-bouncer \
         curl \
         iproute2 \
         kmod \
-        runit \
         nftables \
+        runit \
         udhcpc \
         wget
-
 
 # kernel
 
@@ -47,8 +47,9 @@ COPY --chmod=755 bin/vector /usr/bin/vector
 COPY etc/vector /etc/vector
 
 
-# firewall rules
+# firewall
 
+COPY etc/crowdsec /etc/crowdsec
 COPY etc/nftables.conf /etc/nftables.conf
 
 

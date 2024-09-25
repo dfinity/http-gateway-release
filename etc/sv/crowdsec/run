@@ -1,0 +1,11 @@
+#!/bin/sh
+exec 2>&1
+
+LONG_NAME='crowdsec-firewall-bouncer'
+
+BIN="/usr/bin/${LONG_NAME}"
+CFG="/etc/crowdsec/bouncers/${LONG_NAME}.yaml"
+
+. /mnt/crowdsec/${LONG_NAME}.env
+
+exec chpst -uroot "${BIN}" -c "${CFG}"

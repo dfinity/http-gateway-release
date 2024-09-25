@@ -11,11 +11,14 @@ udhcpc -i eth0
 # Configure firewall
 nft -f /etc/nftables.conf
 
-# mount certificates for ic-gateway
+# mount ic-gateway certificates
 mkdir /mnt/certs && mount /dev/sda /mnt/certs
 
-# mount configuration for certificate-issuer
+# mount certificate-issuer configuration
 mkdir /mnt/cert-issuer && mount /dev/sdb /mnt/cert-issuer
+
+# mount crowdsec configuration
+mkdir /mnt/crowdsec && mount /dev/sdc /mnt/crowdsec
 
 # Start init
 exec runsvdir -P /etc/service
