@@ -8,4 +8,8 @@ CFG="/etc/crowdsec/bouncers/${LONG_NAME}.yaml"
 
 . /mnt/crowdsec/${LONG_NAME}.env
 
+# Inject API credentials
+sed -i "s|{CROWDSEC_API_URL}|${CROWDSEC_API_URL}|g" $CFG
+sed -i "s|{CROWDSEC_API_KEY}|${CROWDSEC_API_KEY}|g" $CFG
+
 exec chpst -uroot "${BIN}" -c "${CFG}"

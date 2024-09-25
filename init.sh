@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 mount -t devtmpfs devtmpfs /dev
 mount -t proc proc /proc
@@ -11,14 +11,19 @@ udhcpc -i eth0
 # Configure firewall
 nft -f /etc/nftables.conf
 
-# mount ic-gateway certificates
-mkdir /mnt/certs && mount /dev/sda /mnt/certs
+mnts=(
+  "/dev/sda /mnt/certs"       # ic-gateway certificates
+  "/dev/sdb /mnt/cert-issuer" # certificate-issuer configuration
+  "/dev/sdc /mnt/crowdsec"    # crowdsec credentials
+)
 
-# mount certificate-issuer configuration
-mkdir /mnt/cert-issuer && mount /dev/sdb /mnt/cert-issuer
+# Configuration mounts
+for v in "${mnts[@]}"; do
+  IFS=' ' read -r dvc mnt <<< $v
 
-# mount crowdsec configuration
-mkdir /mnt/crowdsec && mount /dev/sdc /mnt/crowdsec
+  echo "Mounting $dvc at $mnt"
+  mkdir $mnt && mount $dvc $mnt
+done
 
 # Start init
 exec runsvdir -P /etc/service
