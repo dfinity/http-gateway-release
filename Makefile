@@ -49,7 +49,7 @@ vector:
 	@echo "$(shell cat refs/vector.sha256)  $(BIN_DIR)/vector.tar.gz" | shasum -c
 	@tar -xzf $(BIN_DIR)/vector.tar.gz -C $(BIN_DIR) --strip-components=3 --wildcards '*/bin/vector'
 
-guest-dependencies: dirs ovmf vmlinuz linux-image certificate-issuer vector
+guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway certificate-issuer vector
 
 # Initram disk
 
