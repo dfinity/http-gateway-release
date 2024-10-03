@@ -1,1 +1,0 @@
-https://github.com/dfinity/ic-gateway/releases/download/v0.1.55/ic-gateway

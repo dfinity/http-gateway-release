@@ -1,1 +1,0 @@
-https://github.com/dfinity/sev-snp-deps/releases/download/ovmf-36c2c8a/OVMF.fd

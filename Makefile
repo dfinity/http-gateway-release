@@ -24,32 +24,37 @@ dirs:
 	mkdir -p $(DEPS_DIR) $(BIN_DIR)
 
 ovmf:
-	wget -q $(shell cat refs/ovmf.txt) -O $(DEPS_DIR)/OVMF.fd
-	@echo "$(shell cat refs/ovmf.sha256)  $(DEPS_DIR)/OVMF.fd" | shasum -c
+	wget -q $(shell jq '.["ovmf"].url' refs.json) -O $(DEPS_DIR)/OVMF.fd
+	@echo "$(shell jq '.["ovmf"].sha256' refs.json)  $(DEPS_DIR)/OVMF.fd" | shasum -c
 
 vmlinuz:
-	wget -q $(shell cat refs/vmlinuz.txt) -O $(DEPS_DIR)/vmlinuz
-	@echo "$(shell cat refs/vmlinuz.sha256)  $(DEPS_DIR)/vmlinuz" | shasum -c
+	wget -q $(shell jq '.["vmlinuz"].url' refs.json) -O $(DEPS_DIR)/vmlinuz
+	@echo "$(shell jq '.["vmlinuz"].sha256' refs.json)  $(DEPS_DIR)/vmlinuz" | shasum -c
 
 linux-image:
-	wget -q $(shell cat refs/linux-image.txt) -O $(DEPS_DIR)/linux-image.deb
-	@echo "$(shell cat refs/linux-image.sha256)  $(DEPS_DIR)/linux-image.deb" | shasum -c
+	wget -q $(shell jq '.["linux-image"].url' refs.json) -O $(DEPS_DIR)/linux-image.deb
+	@echo "$(shell jq '.["linux-image"].sha256' refs.json)  $(DEPS_DIR)/linux-image.deb" | shasum -c
 
 ic-gateway:
-	wget $(shell cat refs/ic-gateway.txt) -P $(BIN_DIR)
-	@echo "$(shell cat refs/ic-gateway.sha256)  $(BIN_DIR)/ic-gateway" | shasum -c
+	wget $(shell jq '.["ic-gateway"].url' refs.json) -P $(BIN_DIR)
+	@echo "$(shell jq '.["ic-gateway"].sha256' refs.json)  $(BIN_DIR)/ic-gateway" | shasum -c
 
 certificate-issuer:
-	wget $(shell cat refs/certificate-issuer.txt) -P $(BIN_DIR)
-	@echo "$(shell cat refs/certificate-issuer.sha256)  $(BIN_DIR)/certificate-issuer.gz" | shasum -c
+	wget $(shell jq '.["certificate-issuer"].url' refs.json) -P $(BIN_DIR)
+	@echo "$(shell jq -r '.["certificate-issuer"].sha256' refs.json)  $(BIN_DIR)/certificate-issuer.gz" | shasum -c
 	@gunzip $(BIN_DIR)/certificate-issuer.gz
 
 vector:
-	wget $(shell cat refs/vector.txt) -O $(BIN_DIR)/vector.tar.gz
-	@echo "$(shell cat refs/vector.sha256)  $(BIN_DIR)/vector.tar.gz" | shasum -c
+	wget $(shell jq '.["vector"].url' refs.json) -O $(BIN_DIR)/vector.tar.gz
+	@echo "$(shell jq '.["vector"].sha256' refs.json)  $(BIN_DIR)/vector.tar.gz" | shasum -c
 	@tar -xzf $(BIN_DIR)/vector.tar.gz -C $(BIN_DIR) --strip-components=3 --wildcards '*/bin/vector'
 
-guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway certificate-issuer vector
+node_exporter:
+	wget $(shell jq '.["node_exporter"].url' refs.json) -O $(BIN_DIR)/node_exporter.tar.gz
+	@echo "$(shell jq '.["node_exporter"].sha256' refs.json)  $(BIN_DIR)/node_exporter.tar.gz" | shasum -c
+	@tar -xzf $(BIN_DIR)/node_exporter.tar.gz -C $(BIN_DIR) --strip-components=1 --wildcards '*/node_exporter'
+
+guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway certificate-issuer vector node_exporter
 
 # Initram disk
 
@@ -87,7 +92,7 @@ shasum:
 	@$(SUDO) shasum -a256 initramfs.cpio.gz
 
 pip-sev-snp-measure:
-	@pip install $(shell cat refs/sev-snp-measure.txt) >/dev/null 2>&1
+	@pip install $(shell jq '.["sev-snp-measure"].url' refs.json) >/dev/null 2>&1
 
 sev-snp-measure: pip-sev-snp-measure
 	@sev-snp-measure \

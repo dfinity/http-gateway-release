@@ -1,0 +1,33 @@
+{
+    "ic-gateway": {
+        "url": "https://github.com/dfinity/ic-gateway/releases/download/v0.1.55/ic-gateway",
+        "sha256": "b02908b2864199a4b01d9b023ee376f5487f4812ef76577eba869d69a488f739"
+    },
+    "certificate-issuer": {
+        "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/b0ade55f7e8999e2842fe3f49df163ba224b71a2/release/certificate-issuer.gz",
+        "sha256": "d08efa19e10e68eafb5594ecc57cfe84989ea018302138a403fea7fb4097efde"
+    },
+    "linux-image": {
+        "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-d15cf4a/linux-image-6.10.0-snp-guest-0c38364_6.10.0-1_amd64.deb",
+        "sha256": "745bea5b688c6f43f69473584001e10a9b5b98873774a4bd746926365760a4c9"
+    },
+    "ovmf": {
+        "url": "https://github.com/dfinity/sev-snp-deps/releases/download/ovmf-36c2c8a/OVMF.fd",
+        "sha256": "6b5aad6d8137b236b55c1ff2f54bfaede5863d47"
+    },
+    "sev-snp-measure": {
+        "url": "git+https://github.com/virtee/sev-snp-measure.git@ec2e0e2543940ae6e10ac9ad7fad92db0e3181f6"
+    },
+    "vector": {
+        "url": "https://github.com/vectordotdev/vector/releases/download/v0.40.1/vector-0.40.1-x86_64-unknown-linux-gnu.tar.gz",
+        "sha256": "1e6201e6719d7e46addf8b3fff52c8422d3ad98e89b0a23aacbac6e09c6e1745"
+    },
+    "vmlinuz": {
+        "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-d15cf4a/vmlinuz-6.10.0-snp-guest-0c38364",
+        "sha256": "9df170d6d4c27f24c5a3a815cafea761bde1d9c8e7360e3049529b5235855271"
+    },
+    "node_exporter": {
+        "url": "https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz",
+        "sha256": "6809dd0b3ec45fd6e992c19071d6b5253aed3ead7bf0686885a51d85c6643c66"
+    }
+}

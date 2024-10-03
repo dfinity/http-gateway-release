@@ -1,1 +1,0 @@
-https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/b0ade55f7e8999e2842fe3f49df163ba224b71a2/release/certificate-issuer.gz
