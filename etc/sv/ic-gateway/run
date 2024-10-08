@@ -1,6 +1,6 @@
 #!/bin/sh
-exec 2>&1
+set -a
 
 . /mnt/ic-gateway/ic-gateway.env
 
-exec chpst -uroot /usr/bin/ic-gateway
+exec chpst -uroot /usr/bin/ic-gateway 2>&1
