@@ -11,7 +11,10 @@ mnts=(
   "/dev/sdd /mnt/nftables"    # nftables definitions
 )
 
-# Configure network
+# Configure network (local)
+ip link set lo up
+
+# Configure network (external)
 ip link set eth0 up
 udhcpc -i eth0
 
