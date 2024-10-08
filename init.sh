@@ -5,7 +5,7 @@ mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
 mnts=(
-  "/dev/sda /mnt/certs"       # ic-gateway certificates
+  "/dev/sda /mnt/ic-gateway"  # ic-gateway configuration and certificates
   "/dev/sdb /mnt/cert-issuer" # certificate-issuer configuration
   "/dev/sdc /mnt/crowdsec"    # crowdsec credentials
   "/dev/sdd /mnt/nftables"    # nftables definitions
