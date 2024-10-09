@@ -24,6 +24,7 @@ RUN \
         iproute2 \
         kmod \
         nftables \
+        openssh-server \
         procps \
         runit \
         udhcpc \
@@ -61,7 +62,12 @@ COPY etc/sysctl.d /etc/sysctl.d
 
 # service definitions (runit)
 
-COPY etc/sv /etc/service
+COPY etc/sv /etc/sv
+
+RUN \
+  rm -r \
+    /etc/sv/ssh \
+    /etc/sv/svlogd
 
 
 # init

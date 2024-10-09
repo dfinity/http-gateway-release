@@ -1,0 +1,10 @@
+#!/bin/sh
+
+LOG_DIR='/var/log/sshd'
+
+# Create log dir
+if [ ! -d $LOG_DIR ]; then
+    mkdir -p $LOG_DIR
+fi
+
+exec chpst -uroot svlogd -tt $LOG_DIR

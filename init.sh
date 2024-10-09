@@ -9,6 +9,7 @@ mnts=(
   "/dev/sdb /mnt/cert-issuer" # certificate-issuer configuration
   "/dev/sdc /mnt/crowdsec"    # crowdsec credentials
   "/dev/sdd /mnt/nftables"    # nftables definitions
+  "/dev/sde /mnt/sshd"        # sshd authorized keys
 )
 
 # Configure network (local)
@@ -33,4 +34,4 @@ nft -f /etc/nftables.conf
 sysctl -p /etc/sysctl.d/local.conf
 
 # Start init
-exec runsvdir -P /etc/service
+exec runsvdir -P /etc/sv

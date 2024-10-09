@@ -1,0 +1,17 @@
+#!/bin/sh
+
+CFG='/etc/ssh/sshd_config'
+
+if [ ! -d /run/sshd ]; then
+    mkdir -p /run/sshd
+fi
+
+# Import authorized keys
+if [ -f /mnt/sshd/authorized_keys ]; then
+    cp /mnt/sshd/authorized_keys /root/.ssh/
+fi
+
+# Disable StrictModes
+sed -i "s|#StrictModes yes|StrictModes no|g" $CFG
+
+exec chpst -uroot /usr/sbin/sshd -D 2>&1
