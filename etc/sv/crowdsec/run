@@ -1,6 +1,8 @@
 #!/bin/sh
 exec 2>&1
 
+set -a
+
 LONG_NAME='crowdsec-firewall-bouncer'
 
 BIN="/usr/bin/${LONG_NAME}"
@@ -11,5 +13,9 @@ CFG="/etc/crowdsec/bouncers/${LONG_NAME}.yaml"
 # Inject API credentials
 sed -i "s|{CROWDSEC_API_URL}|${CROWDSEC_API_URL}|g" $CFG
 sed -i "s|{CROWDSEC_API_KEY}|${CROWDSEC_API_KEY}|g" $CFG
+
+TMP_CFG=$(mktemp)
+cp $CFG $TMP_CFG
+CFG=$TMP_CFG
 
 exec chpst -uroot "${BIN}" -c "${CFG}"
