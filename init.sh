@@ -17,7 +17,8 @@ ip link set lo up
 
 # Configure network (external)
 ip link set eth0 up
-udhcpc -i eth0
+dhclient -v -4
+dhclient -v -6
 
 # Configuration mounts
 for v in "${mnts[@]}"; do

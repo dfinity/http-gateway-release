@@ -23,11 +23,11 @@ RUN \
         curl \
         iproute2 \
         kmod \
+        isc-dhcp-client \
         nftables \
         openssh-server \
         procps \
         runit \
-        udhcpc \
         wget
 
 # kernel
