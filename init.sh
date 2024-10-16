@@ -4,13 +4,13 @@ mount -t devtmpfs devtmpfs /dev
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
-mnts=(
-  "/dev/sda /mnt/ic-gateway"  # ic-gateway configuration and certificates
-  "/dev/sdb /mnt/cert-issuer" # certificate-issuer configuration
-  "/dev/sdc /mnt/crowdsec"    # crowdsec credentials
-  "/dev/sdd /mnt/nftables"    # nftables definitions
-  "/dev/sde /mnt/sshd"        # sshd authorized keys
-)
+mnts=("/dev/sda /mnt")
+
+# /mnt/ic-gateway   ic-gateway configuration and certificates
+# /mnt/cert-issuer  certificate-issuer configuration
+# /mnt/crowdsec     crowdsec credentials
+# /mnt/nftables     nftables definitions
+# /mnt/sshd         sshd authorized keys
 
 # Configure network (local)
 ip link set lo up
@@ -25,7 +25,7 @@ for v in "${mnts[@]}"; do
   IFS=' ' read -r dvc mnt <<< $v
 
   echo "Mounting $dvc at $mnt"
-  mkdir $mnt && mount $dvc $mnt
+  mkdir -p $mnt && mount $dvc $mnt
 done
 
 # Configure firewall
