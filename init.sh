@@ -6,9 +6,10 @@ mount -t sysfs sysfs /sys
 
 mnts=("/dev/sda /mnt")
 
-# /mnt/ic-gateway   ic-gateway configuration and certificates
 # /mnt/cert-issuer  certificate-issuer configuration
 # /mnt/crowdsec     crowdsec credentials
+# /mnt/ic-gateway   ic-gateway configuration and certificates
+# /mnt/networking   networking configuration
 # /mnt/nftables     nftables definitions
 # /mnt/sshd         sshd authorized keys
 
@@ -17,8 +18,6 @@ ip link set lo up
 
 # Configure network (external)
 ip link set eth0 up
-dhclient -v -4
-dhclient -v -6
 
 # Configuration mounts
 for v in "${mnts[@]}"; do
@@ -33,6 +32,31 @@ nft -f /etc/nftables.conf
 
 # Configure sysctl
 sysctl -p /etc/sysctl.d/local.conf
+
+# Configure networking (IPv4)
+if [ -f /mnt/networking/ipv4.conf ]; then
+  while IFS=' ' read -r key value; do
+    case "$key" in
+      ipv4_address)
+        echo "Configuring IP address: $value"
+        ip address add $value dev eth0
+        ;;
+
+      ipv4_gateway)
+        echo "Configuring gateway: $value"
+        ip route add default via $value dev eth0
+        ;;
+
+      *)
+        echo "Unknown configuration: $key"
+        ;;
+    esac
+  done < /mnt/networking/ipv4.conf
+fi
+
+# Configure networking (IPv6)
+if [ -f /mnt/networking/ipv6.conf ]; then
+fi
 
 # Start init
 exec runsvdir -P /etc/sv
