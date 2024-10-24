@@ -35,6 +35,7 @@ sysctl -p /etc/sysctl.d/local.conf
 
 # Configure networking (IPv4)
 if [ -f /mnt/networking/ipv4.conf ]; then
+  echo "Configuring IPv4"
   while IFS=' ' read -r key value; do
     case "$key" in
       ipv4_address)
@@ -56,6 +57,7 @@ fi
 
 # Configure networking (IPv6)
 if [ -f /mnt/networking/ipv6.conf ]; then
+  echo "Configuring IPv6"
 fi
 
 # Start init
