@@ -57,7 +57,7 @@ fi
 
 # Configure networking (IPv6)
 if [ -f /mnt/networking/ipv6.conf ]; then
-  echo "Configuring IPv6"
+  echo "IPv6 is configured automatically via SLAAC"
 fi
 
 # Start init
