@@ -93,9 +93,6 @@ initramfs: clean guest-dependencies rootfs
 		cd .. \
 	'
 
-shasum:
-	@$(SUDO) shasum -a256 initramfs.cpio.gz
-
 pip-sev-snp-measure:
 	@pip install $(shell jq '.["sev-snp-measure"].url' refs.json) >/dev/null 2>&1
 
