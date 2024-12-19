@@ -1,11 +1,15 @@
 {
     "ic-gateway": {
-        "url": "https://github.com/dfinity/ic-gateway/releases/download/v0.1.56/ic-gateway",
-        "sha256": "26c0cf5ecbda18553f012441af309a676a5201fe6d69228ca4d25367ed3e8c76"
+        "url": "https://github.com/dfinity/ic-gateway/releases/download/v0.1.61/ic-gateway",
+        "sha256": "dcde4601c7e57372a9488265152ed71366cc710d31f9b1219a197ffa23680fdc"
     },
     "certificate-issuer": {
-        "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/b0ade55f7e8999e2842fe3f49df163ba224b71a2/release/certificate-issuer.gz",
-        "sha256": "d08efa19e10e68eafb5594ecc57cfe84989ea018302138a403fea7fb4097efde"
+        "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/a7fcbb7da1c6dccaa3ef82ec3ba290114a099164/release/certificate-issuer.gz",
+        "sha256": "59da4fbe580d508972d84c49f0b619f3dc41f48b57477ab5787a7eb9e3cbba9c"
+    },
+    "canary-proxy": {
+        "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/a7fcbb7da1c6dccaa3ef82ec3ba290114a099164/release/canary-proxy.gz",
+        "sha256": "acf281c1e930f38a5cad53ebc85066dcc0c67600818bb9965a066e5c501860c6"
     },
     "linux-image": {
         "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-d15cf4a/linux-image-6.10.0-snp-guest-0c38364_6.10.0-1_amd64.deb",

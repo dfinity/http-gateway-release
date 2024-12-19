@@ -44,6 +44,11 @@ certificate-issuer:
 	@echo "$(shell jq -r '.["certificate-issuer"].sha256' refs.json)  $(BIN_DIR)/certificate-issuer.gz" | shasum -c
 	@gunzip $(BIN_DIR)/certificate-issuer.gz
 
+canary-proxy:
+	wget $(shell jq '.["canary-proxy"].url' refs.json) -P $(BIN_DIR)
+	@echo "$(shell jq -r '.["canary-proxy"].sha256' refs.json)  $(BIN_DIR)/canary-proxy.gz" | shasum -c
+	@gunzip $(BIN_DIR)/canary-proxy.gz
+
 vector:
 	wget $(shell jq '.["vector"].url' refs.json) -O $(BIN_DIR)/vector.tar.gz
 	@echo "$(shell jq '.["vector"].sha256' refs.json)  $(BIN_DIR)/vector.tar.gz" | shasum -c
@@ -54,7 +59,7 @@ node_exporter:
 	@echo "$(shell jq '.["node_exporter"].sha256' refs.json)  $(BIN_DIR)/node_exporter.tar.gz" | shasum -c
 	@tar -xzf $(BIN_DIR)/node_exporter.tar.gz -C $(BIN_DIR) --strip-components=1 --wildcards '*/node_exporter'
 
-guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway certificate-issuer vector node_exporter
+guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway canary-proxy certificate-issuer vector node_exporter
 
 # Initram disk
 
