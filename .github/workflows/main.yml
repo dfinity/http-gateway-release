@@ -17,14 +17,18 @@ jobs:
       - name: create initramfs
         run: make initramfs
 
-      - name: Shasum for initramfs
-        run: echo "INITRAMFS_SHASUM=$(make shasum | cut -d' ' -f1)" >> $GITHUB_ENV
-
       - name: Take SEV-SNP measurement
         run: echo "SEV_SNP_MEASUREMENT=$(make sev-snp-measure)" >> $GITHUB_ENV
 
       - name: Set short sha
         run: echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c -7)" >> $GITHUB_ENV
+
+      - name: Calculate artifact checksums
+        run: |
+          echo "INITRAMFS_SHASUM=$(sha256sum initramfs.cpio.gz | cut -d' ' -f1)" >> $GITHUB_ENV
+          echo "VMLINUZ_SHASUM=$(sha256sum deps/vmlinuz | cut -d' ' -f1)" >> $GITHUB_ENV
+          echo "OVMF_SHASUM=$(sha256sum deps/OVMF.fd | cut -d' ' -f1)" >> $GITHUB_ENV
+        shell: bash
 
       - name: release
         uses: softprops/action-gh-release@v2
@@ -38,5 +42,11 @@ jobs:
             | Name | Value |
             | ------------- | ------------- |
             | Local | [${{ github.repository }}:${{ github.sha }}](https://github.com/${{ github.repository }}/tree/${{ github.sha }}) |
-            | INITRAMFS_SHASUM | `${{ env.INITRAMFS_SHASUM }}` |
             | SEV_SNP_MEASUREMENT | `${{ env.SEV_SNP_MEASUREMENT }}` |
+
+            ### Artifact Hashes
+            | Artifact | CHecksum |
+            | ------------- | ------------- |
+            | initramfs.cpio.gz | `${{ env.INITRAMFS_SHASUM }}` |
+            | OVMF.fd | `${{ env.OVMF_SHASUM }}` |
+            | vmlinuz | `${{ env.VMLINUZ_SHASUM }}` |
