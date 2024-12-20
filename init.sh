@@ -61,5 +61,7 @@ if [ -f /mnt/networking/ipv6.conf ]; then
   echo "IPv6 is configured automatically via SLAAC"
 fi
 
+ip a
+
 # Start init
 exec runsvdir -P /etc/sv
