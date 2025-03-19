@@ -2,7 +2,8 @@ name: Update
 
 on:
   workflow_dispatch:
-  push:
+  schedule:
+  - cron: "0 * * * *"
 
 permissions:
   contents: write
@@ -25,3 +26,6 @@ jobs:
           commit_message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
           branch: main
           file_pattern: refs.json
+
+      - name: Trigger a release
+        uses: ./.github/workflows/release.yml
