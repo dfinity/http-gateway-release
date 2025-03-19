@@ -1,0 +1,28 @@
+name: Update
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  initramfs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update ic-gateway
+        id: update
+        run: ./update.sh
+        shell: bash
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: Update
+          commit-message: Update
+          delete-branch: true
+          body: |
+            Updating ic-gateway:
+            ${{join(steps.update.outputs.*, '\n')}}

@@ -1,4 +1,4 @@
-name: initramfs
+name: Release
 
 on:
   push:
