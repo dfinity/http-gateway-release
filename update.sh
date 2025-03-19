@@ -15,7 +15,7 @@ if [ "$OLD_URL" == "$NEW_URL" ]; then
     exit
 fi
 
-NEW_HASH=$(curl -s "${NEW_URL}" | shasum -a 256 | awk '{print $1}')
+NEW_HASH=$(wget -q -O - "${NEW_URL}" | shasum -a 256 | awk '{print $1}')
 
 echo "URL=${NEW_URL}"
 echo "HASH=${NEW_HASH}"
