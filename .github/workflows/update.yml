@@ -28,10 +28,10 @@ jobs:
           branch: update-ic-gateway-${{ steps.update.outputs.VERSION }}
           delete-branch: true
           body: |
-            Updating `ic-gateway`.
+            Updating `ic-gateway`
 
-            Version: ${{ steps.update.outputs.VERSION }}
-            SHA256: ${{ steps.update.outputs.HASH }}
+            Version: `${{ steps.update.outputs.VERSION }}`
+            SHA256: `${{ steps.update.outputs.HASH }}`
 
       - name: Automerge
         if: steps.cpr.outputs.pull-request-operation == 'created'
