@@ -12,6 +12,9 @@ jobs:
   update:
     permissions: write-all
     runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.commit.outputs.changes_detected }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -28,6 +31,7 @@ jobs:
           branch: main
           file_pattern: refs.json
 
-      - name: Trigger a release
-        if: steps.commit.outputs.changes_detected == 'true'
-        uses: ./.github/workflows/release.yml
+  release:
+    needs: update
+    if: needs.update.outputs.changes == 'true'
+    uses: ./.github/workflows/release.yml
