@@ -1,6 +1,7 @@
-name: initramfs
+name: Release
 
 on:
+  workflow_call:
   push:
     branches:
       - main

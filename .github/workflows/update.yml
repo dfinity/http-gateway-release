@@ -1,0 +1,31 @@
+name: Update
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: "0 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update ic-gateway
+        id: update
+        run: ./update.sh > ${GITHUB_OUTPUT}
+        shell: bash
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
+          branch: main
+          file_pattern: refs.json
+
+      - name: Trigger a release
+        uses: ./.github/workflows/release.yml
