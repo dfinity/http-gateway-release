@@ -2,7 +2,6 @@ name: Update
 
 on:
   workflow_dispatch:
-  push:
 
 permissions:
   contents: write
@@ -16,21 +15,22 @@ jobs:
 
       - name: Update ic-gateway
         id: update
-        run: ./update.sh >> ${GITHUB_OUTPUT}
+        run: ./update.sh > ${GITHUB_OUTPUT}
         shell: bash
 
       - name: Create PR
         id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
-          title: Update ic-gateway
-          commit-message: Update ic-gateway
+          title: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
+          commit-message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
           branch: 
           delete-branch: true
           body: |
             Updating `ic-gateway`.
 
-            ${{join(steps.update.outputs.*, '\n')}}
+            Version: ${{ steps.update.outputs.VERSION }}
+            SHA256: ${{ steps.update.outputs.HASH }}
 
       - name: Automerge
         if: steps.cpr.outputs.pull-request-operation == 'created'
