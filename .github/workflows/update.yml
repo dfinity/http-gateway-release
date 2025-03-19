@@ -19,22 +19,9 @@ jobs:
         run: ./update.sh > ${GITHUB_OUTPUT}
         shell: bash
 
-      - name: Create PR
-        id: cpr
-        uses: peter-evans/create-pull-request@v7
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          title: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
-          commit-message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
-          branch: update-ic-gateway-${{ steps.update.outputs.VERSION }}
-          delete-branch: true
-          body: |
-            Updating `ic-gateway`
-
-            Version: `${{ steps.update.outputs.VERSION }}`
-            SHA256: `${{ steps.update.outputs.HASH }}`
-
-      - name: Automerge
-        if: steps.cpr.outputs.pull-request-operation == 'created'
-        run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pull-request-number }}"
-        env:
-          GH_TOKEN: ${{ github.token }}
+          commit_message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
+          branch: main
+          file_pattern: refs.json
