@@ -25,7 +25,7 @@ jobs:
         with:
           title: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
           commit-message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
-          branch: 
+          branch: update-ic-gateway-${{ steps.update.outputs.VERSION }}
           delete-branch: true
           body: |
             Updating `ic-gateway`.
