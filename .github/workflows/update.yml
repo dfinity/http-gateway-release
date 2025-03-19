@@ -21,6 +21,7 @@ jobs:
         shell: bash
 
       - name: Commit
+        id: commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
@@ -28,4 +29,5 @@ jobs:
           file_pattern: refs.json
 
       - name: Trigger a release
+        if: steps.commit.outputs.changes_detected == 'true'
         uses: ./.github/workflows/release.yml
