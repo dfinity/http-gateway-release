@@ -31,6 +31,10 @@ jobs:
           branch: main
           file_pattern: refs.json
 
+      - name: Git Pull
+        run: git pull
+        shell: bash
+  
   release:
     needs: update
     if: needs.update.outputs.changes == 'true'
