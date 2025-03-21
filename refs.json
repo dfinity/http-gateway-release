@@ -1,7 +1,7 @@
 {
   "ic-gateway": {
-    "url": "https://github.com/dfinity/ic-gateway/releases/download/v0.2.0/ic-gateway",
-    "sha256": "10db532e93b3f6e537c7d793f2e7cfe25f5e3ec47a5432c0028e6fba8bedcdb9"
+    "url": "https://github.com/dfinity/ic-gateway/releases/download/v0.2.1/ic-gateway",
+    "sha256": "61a5111979ce47ca5a02e794176c20154f21e9b47b0393c32ac0959b67b37e41"
   },
   "certificate-issuer": {
     "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/2d76bbb56a22fa4cbefc1911fc8f71451f9c67dc/release/certificate-issuer.gz",
