@@ -1,6 +1,7 @@
 #!/bin/bash
 
 mount -t devtmpfs devtmpfs /dev
+mount -t devpts devpts /dev/pts
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 

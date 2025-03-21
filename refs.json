@@ -4,16 +4,16 @@
     "sha256": "10db532e93b3f6e537c7d793f2e7cfe25f5e3ec47a5432c0028e6fba8bedcdb9"
   },
   "certificate-issuer": {
-    "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/a7fcbb7da1c6dccaa3ef82ec3ba290114a099164/release/certificate-issuer.gz",
-    "sha256": "59da4fbe580d508972d84c49f0b619f3dc41f48b57477ab5787a7eb9e3cbba9c"
+    "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/2d76bbb56a22fa4cbefc1911fc8f71451f9c67dc/release/certificate-issuer.gz",
+    "sha256": "c9e7e727a71a968b60ad29f1e0f8e30903b1c2afc9e6d72002dd450e9f5fc0b6"
   },
   "canary-proxy": {
     "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/a7fcbb7da1c6dccaa3ef82ec3ba290114a099164/release/canary-proxy.gz",
     "sha256": "acf281c1e930f38a5cad53ebc85066dcc0c67600818bb9965a066e5c501860c6"
   },
   "linux-image": {
-    "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-d15cf4a/linux-image-6.10.0-snp-guest-0c38364_6.10.0-1_amd64.deb",
-    "sha256": "745bea5b688c6f43f69473584001e10a9b5b98873774a4bd746926365760a4c9"
+    "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-5626bbd/linux-image-6.10.0-snp-guest-0c38364_6.10.0-1_amd64.deb",
+    "sha256": "bda1607e13366840f94a286f80e7f26f152fc174a47c58df0077b3387ee51ad5"
   },
   "ovmf": {
     "url": "https://github.com/dfinity/sev-snp-deps/releases/download/ovmf-36c2c8a/OVMF.fd",
@@ -23,15 +23,15 @@
     "url": "git+https://github.com/virtee/sev-snp-measure.git@ec2e0e2543940ae6e10ac9ad7fad92db0e3181f6"
   },
   "vector": {
-    "url": "https://github.com/vectordotdev/vector/releases/download/v0.40.1/vector-0.40.1-x86_64-unknown-linux-gnu.tar.gz",
-    "sha256": "1e6201e6719d7e46addf8b3fff52c8422d3ad98e89b0a23aacbac6e09c6e1745"
+    "url": "https://github.com/vectordotdev/vector/releases/download/v0.45.0/vector-0.45.0-x86_64-unknown-linux-gnu.tar.gz",
+    "sha256": "2d1076c4484222edd9bd1f566b3d395428cd7c934579f8f0301d04371c178e57"
   },
   "vmlinuz": {
-    "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-d15cf4a/vmlinuz-6.10.0-snp-guest-0c38364",
+    "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-5626bbd/vmlinuz-6.10.0-snp-guest-0c38364",
     "sha256": "9df170d6d4c27f24c5a3a815cafea761bde1d9c8e7360e3049529b5235855271"
   },
   "node_exporter": {
-    "url": "https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz",
-    "sha256": "6809dd0b3ec45fd6e992c19071d6b5253aed3ead7bf0686885a51d85c6643c66"
+    "url": "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz",
+    "sha256": "e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"
   }
 }

@@ -46,7 +46,7 @@ jobs:
             | SEV_SNP_MEASUREMENT | `${{ env.SEV_SNP_MEASUREMENT }}` |
 
             ### Artifact Hashes
-            | Artifact | CHecksum |
+            | Artifact | Checksum |
             | ------------- | ------------- |
             | initramfs.cpio.gz | `${{ env.INITRAMFS_SHASUM }}` |
             | OVMF.fd | `${{ env.OVMF_SHASUM }}` |
