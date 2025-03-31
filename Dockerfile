@@ -19,7 +19,6 @@ RUN \
     apt install --update --snapshot "${SNAPSHOT}" -o Acquire::Check-Valid-Until=false -o Acquire::https::Verify-Peer=false -y ca-certificates && \
     : "Install dependencies" && \
     apt install --snapshot "${SNAPSHOT}" -y \
-        crowdsec-firewall-bouncer \
         curl \
         iproute2 \
         kmod \
@@ -33,7 +32,6 @@ RUN \
 # kernel
 
 COPY deps/linux-image.deb .
-
 RUN dpkg -i linux-image.deb && rm linux-image.deb
 
 
@@ -44,6 +42,15 @@ COPY --chmod=755 bin/certificate-issuer /usr/bin/certificate-issuer
 COPY --chmod=755 bin/ic-gateway /usr/bin/ic-gateway
 COPY --chmod=755 bin/vector /usr/bin/vector
 COPY --chmod=755 bin/node_exporter /usr/bin/node_exporter
+
+
+# crowdsec
+
+RUN wget https://github.com/crowdsecurity/cs-firewall-bouncer/releases/download/v0.0.31/crowdsec-firewall-bouncer-linux-amd64.tgz && \
+    echo "e4f6ed09fd9ce74117c2bc3db950326304cc741e1f6f532583d35b73a42dbad9  crowdsec-firewall-bouncer-linux-amd64.tgz" | shasum -c && \
+    tar xzf crowdsec-firewall-bouncer-linux-amd64.tgz
+
+COPY crowdsec-firewall-bouncer-v0.0.31/crowdsec-firewall-bouncer /usr/bin/crowdsec-firewall-bouncer
 
 
 # vector config
@@ -74,7 +81,6 @@ RUN \
 # init
 
 COPY --chmod=755 init.sh /init
-
 
 RUN \
   --mount=type=cache,target=/var/cache/apt,sharing=locked \
