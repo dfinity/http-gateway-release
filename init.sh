@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mount -t devtmpfs devtmpfs /dev
-mount -t devpts devpts /dev/pts
+mkdir /dev/pts && mount -t devpts devpts /dev/pts
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
@@ -14,6 +14,11 @@ mnts=("/dev/sda /mnt")
 # /mnt/networking   networking configuration
 # /mnt/nftables     nftables definitions
 # /mnt/sshd         sshd authorized keys
+
+# Set hostname if any
+if [ -f /mnt/hostname ]; then
+  hostname `cat /mnt/hostname`
+fi
 
 # Configure network (local)
 ip link set lo up
