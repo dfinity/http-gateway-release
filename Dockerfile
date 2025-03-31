@@ -48,9 +48,8 @@ COPY --chmod=755 bin/node_exporter /usr/bin/node_exporter
 
 RUN wget https://github.com/crowdsecurity/cs-firewall-bouncer/releases/download/v0.0.31/crowdsec-firewall-bouncer-linux-amd64.tgz && \
     echo "e4f6ed09fd9ce74117c2bc3db950326304cc741e1f6f532583d35b73a42dbad9  crowdsec-firewall-bouncer-linux-amd64.tgz" | shasum -c && \
-    tar xzf crowdsec-firewall-bouncer-linux-amd64.tgz
-
-COPY crowdsec-firewall-bouncer-v0.0.31/crowdsec-firewall-bouncer /usr/bin/crowdsec-firewall-bouncer
+    tar xzf crowdsec-firewall-bouncer-linux-amd64.tgz && \
+    crowdsec-firewall-bouncer-v0.0.31/crowdsec-firewall-bouncer /usr/bin/crowdsec-firewall-bouncer
 
 
 # vector config
