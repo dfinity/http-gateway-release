@@ -69,7 +69,7 @@ fi
 
 ip a
 
-/sbin/agetty --keep-baud 115200,38400,9600 ttyS1 &
+/sbin/agetty --keep-baud 115200,38400,9600 -a root ttyS1 linux &
 
 # Start init
 exec runsvdir -P /etc/sv
