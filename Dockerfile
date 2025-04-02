@@ -27,6 +27,7 @@ RUN \
         openssh-server \
         procps \
         runit \
+        ntp \
         wget
 
 # kernel
@@ -76,6 +77,8 @@ RUN \
     /etc/sv/ssh \
     /etc/sv/svlogd
 
+# misc
+COPY etc/hosts /etc/hosts
 
 # init
 

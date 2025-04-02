@@ -15,11 +15,6 @@ mnts=("/dev/sda /mnt")
 # /mnt/nftables     nftables definitions
 # /mnt/sshd         sshd authorized keys
 
-# Set hostname if any
-if [ -f /mnt/hostname ]; then
-  hostname `cat /mnt/hostname`
-fi
-
 # Configure network (local)
 ip link set lo up
 
@@ -33,6 +28,13 @@ for v in "${mnts[@]}"; do
   echo "Mounting $dvc at $mnt"
   mkdir -p $mnt && mount $dvc $mnt
 done
+
+# Set hostname if any
+if [ -f /mnt/hostname ]; then
+  hostname -F /mnt/hostname
+  HOSTNAME=$(cat /mnt/hostname)
+  echo "127.0.0.1 ${HOSTNAME}" >> /etc/hosts
+fi
 
 # Configure firewall
 nft -f /etc/nftables.conf
@@ -68,8 +70,6 @@ if [ -f /mnt/networking/ipv6.conf ]; then
 fi
 
 ip a
-
-/sbin/agetty --keep-baud 115200,38400,9600 -a root ttyS1 linux &
 
 # Start init
 exec runsvdir -P /etc/sv
