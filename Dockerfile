@@ -28,7 +28,9 @@ RUN \
         procps \
         runit \
         ntp \
-        wget
+        wget \
+        nano \
+        vi
 
 # kernel
 
