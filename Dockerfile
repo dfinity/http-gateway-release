@@ -30,7 +30,7 @@ RUN \
         ntp \
         wget \
         nano \
-        vi
+        vim
 
 # kernel
 
