@@ -66,7 +66,26 @@ fi
 
 # Configure networking (IPv6)
 if [ -f /mnt/networking/ipv6.conf ]; then
-  echo "IPv6 is configured automatically via SLAAC"
+  echo "Configuring IPv6"
+  while IFS=' ' read -r key value; do
+    case "$key" in
+      ipv6_address)
+        echo "Configuring IP address: $value"
+        ip -6 address add $value dev eth0
+        ;;
+
+      ipv6_gateway)
+        echo "Configuring gateway: $value"
+        ip -6 route add default via $value dev eth0
+        ;;
+
+      *)
+        echo "Unknown configuration: $key"
+        ;;
+    esac
+  done < /mnt/networking/ipv6.conf
+else
+  echo "No IPv6 configuration found. IPv6 is configured automatically via SLAAC"
 fi
 
 ip a
