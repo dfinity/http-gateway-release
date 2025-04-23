@@ -1,3 +1,3 @@
 #!/bin/sh
 
-exec chpst -uroot /usr/sbin/ntpd 2>&1
+exec chpst -uroot /usr/sbin/ntpd -n 2>&1
