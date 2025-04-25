@@ -99,9 +99,9 @@ pip-sev-snp-measure:
 sev-snp-measure: pip-sev-snp-measure
 	@sev-snp-measure \
 		--mode snp \
-		--vcpus='1' \
-		--vcpu-type='EPYC-v4' \
+		--vcpus='30' \
+		--vcpu-type='EPYC-v3' \
 		--ovmf="$(DEPS_DIR)/OVMF.fd" \
 		--kernel="$(DEPS_DIR)/vmlinuz" \
 		--initrd='initramfs.cpio.gz' \
-		--append='console=ttyS0'
+		--append='console=ttyS0,115200n8'
