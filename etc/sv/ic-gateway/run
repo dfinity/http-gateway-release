@@ -2,5 +2,5 @@
 set -a
 
 . /mnt/ic-gateway/ic-gateway.env
-
-exec chpst -u root -o 262144 /usr/bin/ic-gateway 2>&1
+ulimit -n 262144
+exec chpst -u root /usr/bin/ic-gateway 2>&1
