@@ -1,6 +1,6 @@
 {
   "ic-gateway": {
-    "url": "https://github.com/dfinity/ic-gateway/releases/download/v0.2.19/ic-gateway",
+    "url": "https://github.com/dfinity/ic-gateway/releases/download/v0.2.20/ic-gateway",
     "sha256": "f9e346e518e23692a222252dcf3b450133fff153a67646bd2f06483ad71afb33"
   },
   "certificate-issuer": {
