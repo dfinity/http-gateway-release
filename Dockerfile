@@ -1,11 +1,11 @@
 # syntax=docker/dockerfile:1
 
-FROM debian:trixie-20250317-slim
+FROM debian:trixie-20250520-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# https://snapshot.debian.org/archive/debian/20250331T083745Z/
-ARG SNAPSHOT=20250331T083745Z
+# https://snapshot.debian.org/archive/debian/20250527T022950Z/
+ARG SNAPSHOT=20250527T022950Z
 
 RUN \
   --mount=type=cache,target=/var/cache/apt,sharing=locked \
