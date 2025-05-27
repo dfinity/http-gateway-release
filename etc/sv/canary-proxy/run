@@ -1,8 +1,0 @@
-#!/bin/sh
-exec 2>&1
-
-. /mnt/canary-proxy/canary-proxy.env
-
-exec chpst -uroot /usr/bin/canary-proxy \
-    --listen-port "${CANARY_PROXY_PORT}"  \
-    --target-host 127.0.0.1

@@ -7,7 +7,6 @@ mount -t sysfs sysfs /sys
 
 mnts=("/dev/sda /mnt")
 
-# /mnt/canary-proxy canary-proxy configuration (listen port)
 # /mnt/cert-issuer  certificate-issuer configuration
 # /mnt/crowdsec     crowdsec credentials
 # /mnt/ic-gateway   ic-gateway configuration and certificates
