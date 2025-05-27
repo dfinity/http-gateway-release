@@ -22,14 +22,14 @@ RUN \
   curl \
   iproute2 \
   kmod \
-  isc-dhcp-client \
   nftables \
   openssh-server \
   procps \
   runit \
-  ntp \
+  ntpsec \
   wget \
   nano \
+  tcpdump \
   vim
 
 # kernel
