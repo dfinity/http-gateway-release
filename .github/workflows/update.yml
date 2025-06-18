@@ -30,8 +30,3 @@ jobs:
           commit_message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
           branch: main
           file_pattern: refs.json
-
-  release:
-    needs: update
-    if: needs.update.outputs.changes == 'true'
-    uses: ./.github/workflows/release.yml

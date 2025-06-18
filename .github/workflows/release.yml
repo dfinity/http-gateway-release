@@ -1,8 +1,10 @@
 name: Release
 
 on:
-  workflow_call:
   workflow_dispatch:
+  push:
+    paths:
+      - refs.json
 
 permissions:
   contents: write
@@ -12,10 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
 
-      - name: create initramfs
+      - name: Create initramfs
         run: make initramfs
 
       - name: Take SEV-SNP measurement
