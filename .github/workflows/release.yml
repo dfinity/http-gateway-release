@@ -3,6 +3,8 @@ name: Release
 on:
   workflow_dispatch:
   push:
+    branches:
+      - main
     paths:
       - refs.json
 
@@ -13,7 +15,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Create initramfs
         run: make initramfs
@@ -32,7 +34,7 @@ jobs:
         shell: bash
 
       - name: release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8
         with:
           tag_name: ${{ env.SHORT_SHA }}
           files: |
