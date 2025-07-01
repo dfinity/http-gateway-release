@@ -7,9 +7,14 @@ in confidential computing environments such as AMD SEV-SNP trusted execution env
 The HTTP Gateway is in production use by the DFINITY Foundation, serving traffic for
 `ic0.app`, `icp0.io`, `icp-api.io`, and all custom domains (e.g., `internetcomputer.org`).
 
-## Components
+## Releases
 
-This repository produces the following artifacts:
+Each [release](https://github.com/dfinity/http-gateway-release/releases) includes the following artifacts:
+
+- `initramfs`
+- `vmlinuz`
+- `OVMF.fd`
+- and an SEV-SNP measurement assuming a configuration with 30 vCPUs
 
 ### `initramfs`
 
@@ -21,8 +26,6 @@ A custom initramfs image that includes:
 - `node-exporter` for system-level metrics
 - `runit` a lightweight init system and service supervisor
 
-The image is built via a Dockerfile to ensure deterministic output.
-
 ### `vmlinuz`
 
 - Linux kernel image, sourced from the [SEV-SNP dependencies repository](https://github.com/dfinity/sev-snp-deps)
@@ -30,15 +33,6 @@ The image is built via a Dockerfile to ensure deterministic output.
 ### `OVMF.fd`
 
 - UEFI firmware file for booting in a virtualized environment, also sourced from the [SEV-SNP dependencies repository](https://github.com/dfinity/sev-snp-deps)
-
-## Releases
-
-Each [release](https://github.com/dfinity/http-gateway-release/releases) includes the following artifacts:
-
-- `initramfs`
-- `vmlinuz`
-- `OVMF.fd`
-- A SEV-SNP measurement assuming a configuration with 30 vCPUs
 
 ## License
 
