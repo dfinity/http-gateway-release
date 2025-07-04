@@ -4,8 +4,8 @@
     "sha256": "316f5bc60d60eaa15b8fc52642ba1449725c1f4d8711267ef116d52078de1c29"
   },
   "certificate-issuer": {
-    "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/079ae336a7d84c622d169260cf001c9d66866f7f/release/certificate-issuer.gz",
-    "sha256": "299cbff9fc168cfbf629582e63d001950cc2f7613386ec359913191d2fdda199"
+    "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/ab9007b124ab7e3a376ab1e11af02694f39ba3dd/release/certificate-issuer.gz",
+    "sha256": "65e14d4331c7da8227f595ec754a6a567cf2d3c4b446bf2d1c479491488838a5"
   },
   "linux-image": {
     "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-4ee82fb/linux-image-6.13.0-snp-guest-ffd294d_6.13.0-1_amd64.deb",
