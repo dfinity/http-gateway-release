@@ -1,4 +1,4 @@
-# DFINITY Internet Computer HTTP Gateway
+# DFINITY HTTP Gateway for the Internet Computer Protocol
 
 This repository builds a minimal, deterministic, and verifiable HTTP Gateway for the
 [Internet Computer Protocol (ICP)](https://internetcomputer.org), designed for deployment
@@ -34,6 +34,11 @@ A custom initramfs image that includes:
 ### `OVMF.fd`
 
 - UEFI firmware file for booting in a virtualized environment, also sourced from the [SEV-SNP dependencies repository](https://github.com/dfinity/sev-snp-deps)
+
+## Remote Attestation of SEV-SNP-enabled HTTP Gateways
+
+See [Attestation Guide](attestation-guide.md) for instructions on how to remotely attest
+and verify the SEV-SNP-enabled HTTP Gateways.
 
 ## License
 
