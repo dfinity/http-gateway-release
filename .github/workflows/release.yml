@@ -19,6 +19,8 @@ jobs:
 
       - name: Create initramfs
         run: make initramfs
+        env:
+          GH_TOKEN: ${{ secrets.IC_HTTP_LB_RELEASE_GH_TOKEN }}
 
       - name: Take SEV-SNP measurement
         run: echo "SEV_SNP_MEASUREMENT=$(make sev-snp-measure)" >> $GITHUB_ENV

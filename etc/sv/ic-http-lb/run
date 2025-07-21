@@ -1,0 +1,10 @@
+#!/bin/sh
+set -a
+
+if [ ! -d /mnt/ic-http-lb ]; then
+    exit
+fi
+
+. /mnt/ic-http-lb/ic-http-lb.env
+ulimit -n 262144
+exec chpst -u root /usr/bin/ic-http-lb 2>&1

@@ -36,8 +36,12 @@ linux-image:
 	@echo "$(shell jq '.["linux-image"].sha256' refs.json)  $(DEPS_DIR)/linux-image.deb" | shasum -c
 
 ic-gateway:
-	wget $(shell jq '.["ic-gateway"].url' refs.json) -P $(BIN_DIR)
+	wget --header="Accept: application/octet-stream" $(shell jq '.["ic-gateway"].url' refs.json) -O $(BIN_DIR)/ic-gateway
 	@echo "$(shell jq '.["ic-gateway"].sha256' refs.json)  $(BIN_DIR)/ic-gateway" | shasum -c
+
+ic-http-lb:
+	wget --header="Authorization: Bearer ${GH_TOKEN}" --header="Accept: application/octet-stream" $(shell jq '.["ic-http-lb"].url' refs.json) -O $(BIN_DIR)/ic-http-lb
+	@echo "$(shell jq '.["ic-http-lb"].sha256' refs.json)  $(BIN_DIR)/ic-http-lb" | shasum -c
 
 certificate-issuer:
 	wget $(shell jq '.["certificate-issuer"].url' refs.json) -P $(BIN_DIR)
@@ -54,7 +58,7 @@ node_exporter:
 	@echo "$(shell jq '.["node_exporter"].sha256' refs.json)  $(BIN_DIR)/node_exporter.tar.gz" | shasum -c
 	@tar -xzf $(BIN_DIR)/node_exporter.tar.gz -C $(BIN_DIR) --strip-components=1 --wildcards '*/node_exporter'
 
-guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway certificate-issuer vector node_exporter
+guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway ic-http-lb certificate-issuer vector node_exporter
 
 # Initram disk
 
