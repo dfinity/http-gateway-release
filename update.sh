@@ -1,25 +1,36 @@
 #!/bin/bash
 
-# Updates ic-gateway to the last release if it's different
+# Updates the given target to the last release if it's different
+
+TARGET="$1"
 
 RELEASE="release.json"
-curl -s https://api.github.com/repos/dfinity/ic-gateway/releases/latest > $RELEASE
 
-OLD_URL=$(jq -r '.["ic-gateway"].url' refs.json)
-NEW_URL=$(jq -r '.assets[] | select(.name == "ic-gateway") | .browser_download_url' $RELEASE)
-VERSION=$(jq -r '.name' $RELEASE)
+if [ "${GH_TOKEN}" != "" ]; then
+    AUTH_HEADER="Authorization: Bearer ${GH_TOKEN}"
+else
+    AUTH_HEADER=""
+fi
+
+curl -fsSL \
+    -H "${AUTH_HEADER}" \
+    https://api.github.com/repos/dfinity/${TARGET}/releases/latest > ${RELEASE}
+
+OLD_HASH=$(jq -r ".[\"${TARGET}\"].sha256" refs.json)
+NEW_HASH=$(jq -r ".assets[] | select(.name == \"${TARGET}\") | .digest" ${RELEASE} | cut -d':' -f2)
+ASSET_ID=$(jq -r ".assets[] | select(.name == \"${TARGET}\") | .id" ${RELEASE})
+VERSION=$(jq -r ".tag_name" ${RELEASE})
+URL="https://api.github.com/repos/dfinity/${TARGET}/releases/assets/${ASSET_ID}"
 
 rm -f $RELEASE
 
-if [ "$OLD_URL" == "$NEW_URL" ]; then
+if [ "${OLD_HASH}" == "${NEW_HASH}" ]; then
     exit
 fi
 
-NEW_HASH=$(wget -q -O - "${NEW_URL}" | shasum -a 256 | awk '{print $1}')
-
-echo "URL=${NEW_URL}"
+echo "URL=${URL}"
 echo "HASH=${NEW_HASH}"
 echo "VERSION=${VERSION}"
 
-jq ".[\"ic-gateway\"].url = \"${NEW_URL}\" | .[\"ic-gateway\"].sha256 = \"${NEW_HASH}\"" refs.json > refs.json.new
+jq ".[\"${TARGET}\"].url = \"${URL}\" | .[\"${TARGET}\"].sha256 = \"${NEW_HASH}\"" refs.json > refs.json.new
 mv refs.json.new refs.json

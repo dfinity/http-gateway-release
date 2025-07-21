@@ -42,6 +42,7 @@ RUN dpkg -i linux-image.deb && rm linux-image.deb
 
 COPY --chmod=755 bin/certificate-issuer /usr/bin/certificate-issuer
 COPY --chmod=755 bin/ic-gateway /usr/bin/ic-gateway
+COPY --chmod=755 bin/ic-http-lb /usr/bin/ic-http-lb
 COPY --chmod=755 bin/vector /usr/bin/vector
 COPY --chmod=755 bin/node_exporter /usr/bin/node_exporter
 

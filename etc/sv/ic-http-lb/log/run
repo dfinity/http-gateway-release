@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if [ ! -d /mnt/ic-gateway ]; then
+if [ ! -d /mnt/ic-http-lb ]; then
     exit
 fi
 
-LOG_DIR='/var/log/ic-gateway'
+LOG_DIR='/var/log/ic-http-lb'
 
 # Create log dir
 if [ ! -d $LOG_DIR ]; then

@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  update:
+  update-ic-gateway:
     permissions: write-all
     runs-on: ubuntu-latest
     outputs:
@@ -20,7 +20,7 @@ jobs:
 
       - name: Update ic-gateway
         id: update
-        run: ./update.sh > ${GITHUB_OUTPUT}
+        run: ./update.sh ic-gateway > ${GITHUB_OUTPUT}
         shell: bash
 
       - name: Commit
@@ -28,5 +28,29 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
         with:
           commit_message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
+          branch: main
+          file_pattern: refs.json
+
+  update-ic-http-lb:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    outputs:
+      changes: ${{ steps.commit.outputs.changes_detected }}
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Update ic-http-lb
+        id: update
+        run: ./update.sh ic-http-lb > ${GITHUB_OUTPUT}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.IC_HTTP_LB_RELEASE_GH_TOKEN }}
+
+      - name: Commit
+        id: commit
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
+        with:
+          commit_message: Update ic-http-lb to ${{ steps.update.outputs.VERSION }}
           branch: main
           file_pattern: refs.json

@@ -1,6 +1,10 @@
 #!/bin/sh
 set -a
 
+if [ ! -d /mnt/ic-gateway ]; then
+    exit
+fi
+
 . /mnt/ic-gateway/ic-gateway.env
 ulimit -n 262144
 exec chpst -u root /usr/bin/ic-gateway 2>&1
