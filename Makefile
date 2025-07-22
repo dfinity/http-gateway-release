@@ -99,7 +99,9 @@ sev-snp-measure: pip-sev-snp-measure
 	@sev-snp-measure \
 		--mode snp \
 		--vcpus='30' \
-		--vcpu-type='EPYC-v3' \
+  		--vcpu-family=25 \
+  		--vcpu-model=1 \
+  		--vcpu-stepping=1 \
 		--ovmf="$(DEPS_DIR)/OVMF.fd" \
 		--kernel="$(DEPS_DIR)/vmlinuz" \
 		--initrd='initramfs.cpio.gz' \
