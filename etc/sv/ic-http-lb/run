@@ -2,6 +2,7 @@
 set -a
 
 if [ ! -d /mnt/ic-http-lb ]; then
+    sleep 86400
     exit
 fi
 

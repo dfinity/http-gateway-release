@@ -2,6 +2,7 @@
 set -a
 
 if [ ! -d /mnt/ic-gateway ]; then
+    sleep 86400
     exit
 fi
 
