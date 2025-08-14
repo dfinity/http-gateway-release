@@ -1,7 +1,7 @@
 {
   "ic-gateway": {
-    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/277038665",
-    "sha256": "8dbb14f2ca70f976adb59e901d5a79eca4f4a773e2f9117e98afdd209146a023"
+    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/282490523",
+    "sha256": "75c9c3d6547d4c342bcd855ee0c9e16ab8713046f48a3c4b37bcdd16dcf561d9"
   },
   "ic-http-lb": {
     "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/277749943",
@@ -33,5 +33,9 @@
   "node_exporter": {
     "url": "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz",
     "sha256": "e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"
+  },
+  "ic-gatewa": {
+    "url": "https://api.github.com/repos/dfinity/ic-gatewa/releases/assets/",
+    "sha256": ""
   }
 }
