@@ -33,9 +33,5 @@
   "node_exporter": {
     "url": "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz",
     "sha256": "e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"
-  },
-  "ic-gatewa": {
-    "url": "https://api.github.com/repos/dfinity/ic-gatewa/releases/assets/",
-    "sha256": ""
   }
 }
