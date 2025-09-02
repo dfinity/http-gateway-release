@@ -1,11 +1,11 @@
 {
   "ic-gateway": {
-    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/282490523",
-    "sha256": "75c9c3d6547d4c342bcd855ee0c9e16ab8713046f48a3c4b37bcdd16dcf561d9"
+    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/288737623",
+    "sha256": "3ca12d126de22da742d06c80b14262c5472ded2ad90c41f474734b6a03964934"
   },
   "ic-http-lb": {
-    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/277749943",
-    "sha256": "d62b287f764c5b806ea5c58fb5cf737a20ec38604b3ae330c3e3fd4599db10a7"
+    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/286740084",
+    "sha256": "115caab189049941c554313449513c4715bf6d6cd434d203be7930f902c691a1"
   },
   "certificate-issuer": {
     "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/ab9007b124ab7e3a376ab1e11af02694f39ba3dd/release/certificate-issuer.gz",
