@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Updates the given target to the last release if it's different
+# Updates the given target to the latest release if it's different to the one in refs.json
 
 TARGET="$1"
 
