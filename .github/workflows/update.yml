@@ -20,6 +20,9 @@ jobs:
       - name: Update ic-http-lb
         run: ./update.sh ic-http-lb
 
+      - name: Fake change
+        run: echo 1 > temp.txt
+
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
