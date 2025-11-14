@@ -14,6 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
+          ref: main
           ssh-key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
 
       - name: Update ic-gateway
@@ -29,7 +30,6 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
-          base: "main"
           branch: "update-packages"
           delete-branch: true
           title: "Update packages"
