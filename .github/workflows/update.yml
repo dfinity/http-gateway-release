@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           ref: main
-          ssh-key: ${{ secrets.SSH_DEPLOYMENT_KEY }}
+          token: ${{ secrets.RELEASE_TOKEN }}
 
       - name: Update ic-gateway
         run: ./update.sh ic-gateway
@@ -23,13 +23,11 @@ jobs:
       - name: Update ic-http-lb
         run: ./update.sh ic-http-lb
 
-      - name: Fake change
-        run: echo 1 > temp.txt
-
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
+          token: ${{ secrets.RELEASE_TOKEN }}
           branch: "update-packages"
           delete-branch: true
           title: "Update packages"
@@ -40,4 +38,5 @@ jobs:
         if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v3
         with:
+          token: ${{ secrets.RELEASE_TOKEN }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
