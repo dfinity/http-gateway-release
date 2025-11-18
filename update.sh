@@ -2,6 +2,8 @@
 
 # Updates the given target to the latest release if it's different to the one in refs.json
 
+set -e
+
 TARGET="$1"
 
 if [ "${TARGET}" == "" ]; then
@@ -11,15 +13,7 @@ fi
 
 RELEASE="release.json"
 
-if [ "${GH_TOKEN}" != "" ]; then
-    AUTH_HEADER="Authorization: Bearer ${GH_TOKEN}"
-else
-    AUTH_HEADER=""
-fi
-
-curl -fsSL \
-    -H "${AUTH_HEADER}" \
-    https://api.github.com/repos/dfinity/${TARGET}/releases/latest > ${RELEASE}
+curl -fsSL https://api.github.com/repos/dfinity/${TARGET}/releases/latest > ${RELEASE}
 
 OLD_HASH=$(jq -r ".[\"${TARGET}\"].sha256" refs.json)
 NEW_HASH=$(jq -r ".assets[] | select(.name == \"${TARGET}\") | .digest" ${RELEASE} | cut -d':' -f2)

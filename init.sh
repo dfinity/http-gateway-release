@@ -76,7 +76,12 @@ if [ -f /mnt/networking/ipv6.conf ]; then
 
       ipv6_gateway)
         echo "Configuring gateway: $value"
-        ip -6 route add default via $value dev eth0
+        # Disable receiving RAs
+        sysctl net.ipv6.conf.all.accept_ra=0
+        # Remove the potentially added gateways from RAs
+        ip -6 route delete default
+        # Add static gateway
+        ip -6 route replace default via $value dev eth0
         ;;
 
       *)
