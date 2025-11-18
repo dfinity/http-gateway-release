@@ -2,53 +2,55 @@ name: Update
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
 
 permissions:
   contents: write
 
 jobs:
-  update-ic-gateway:
+  update-packages:
     permissions: write-all
     runs-on: ubuntu-latest
-    outputs:
-      changes: ${{ steps.commit.outputs.changes_detected }}
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
 
       - name: Update ic-gateway
-        id: update
-        run: ./update.sh ic-gateway > ${GITHUB_OUTPUT}
-        shell: bash
-
-      - name: Commit
-        id: commit
-        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
-        with:
-          commit_message: Update ic-gateway to ${{ steps.update.outputs.VERSION }}
-          branch: main
-          file_pattern: refs.json
-
-  update-ic-http-lb:
-    permissions: write-all
-    runs-on: ubuntu-latest
-    outputs:
-      changes: ${{ steps.commit.outputs.changes_detected }}
-
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        run: ./update.sh ic-gateway
 
       - name: Update ic-http-lb
-        id: update
-        run: ./update.sh ic-http-lb > ${GITHUB_OUTPUT}
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.IC_HTTP_LB_RELEASE_GH_TOKEN }}
+        run: ./update.sh ic-http-lb
 
-      - name: Commit
-        id: commit
-        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
+      - name: Create GitHub App Token
+        uses: actions/create-github-app-token@v2
+        id: app-token
         with:
-          commit_message: Update ic-http-lb to ${{ steps.update.outputs.VERSION }}
-          branch: main
-          file_pattern: refs.json
+          app-id: ${{ vars.PR_AUTOMATION_BOT_PUBLIC_APP_ID }}
+          private-key: ${{ secrets.PR_AUTOMATION_BOT_PUBLIC_PRIVATE_KEY }}
+
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: "update-packages"
+          delete-branch: true
+          title: "Update packages"
+          commit-message: "Update packages"
+          body: "Update packages"
+
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+
+      - name: Auto approve
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
