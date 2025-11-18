@@ -4,6 +4,11 @@
 
 TARGET="$1"
 
+if [ "${TARGET}" == "" ]; then
+    echo "You need to specify a target to update"
+    exit 1
+fi
+
 RELEASE="release.json"
 
 if [ "${GH_TOKEN}" != "" ]; then
