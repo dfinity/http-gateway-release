@@ -55,3 +55,11 @@ jobs:
             | initramfs.cpio.gz | `${{ env.INITRAMFS_SHASUM }}` |
             | OVMF.fd | `${{ env.OVMF_SHASUM }}` |
             | vmlinuz | `${{ env.VMLINUZ_SHASUM }}` |
+
+      - name: Send Slack message
+        uses: slackapi/slack-github-action@91efab103c0de0a537f72a35f6b8cda0ee76bf0a
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "New `http-gateway` release `${{ env.SHORT_SHA }}` has been published"
