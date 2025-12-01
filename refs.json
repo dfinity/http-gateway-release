@@ -4,8 +4,8 @@
     "sha256": "c7f7f7ecccb9115cd81a281dd54073c7c5f9f2ccb0b95486dc3e5d0ced7f162b"
   },
   "ic-http-lb": {
-    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/320242321",
-    "sha256": "f9b69e4fc56c3c4a8e1ffa8f7d2e1f2eddd6fd216df375dbebe725142bd275a4"
+    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/322876123",
+    "sha256": "504fc4354d42e209a0aaeae629ab12d7212da74274f2f940bfcf1b4d36fa472b"
   },
   "certificate-issuer": {
     "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/ab9007b124ab7e3a376ab1e11af02694f39ba3dd/release/certificate-issuer.gz",
