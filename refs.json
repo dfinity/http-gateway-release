@@ -7,10 +7,6 @@
     "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/322876123",
     "sha256": "504fc4354d42e209a0aaeae629ab12d7212da74274f2f940bfcf1b4d36fa472b"
   },
-  "certificate-issuer": {
-    "url": "https://dfinity-download-public.s3.eu-central-1.amazonaws.com/ic/ab9007b124ab7e3a376ab1e11af02694f39ba3dd/release/certificate-issuer.gz",
-    "sha256": "65e14d4331c7da8227f595ec754a6a567cf2d3c4b446bf2d1c479491488838a5"
-  },
   "linux-image": {
     "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-4ee82fb/linux-image-6.13.0-snp-guest-ffd294d_6.13.0-1_amd64.deb",
     "sha256": "401a71df5499a9959319e9eeb16f9aeaec6f3553b80f35d3a1f48eb05dad3c84"

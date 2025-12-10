@@ -7,7 +7,6 @@ mount -t sysfs sysfs /sys
 
 mnts=("/dev/sda /mnt")
 
-# /mnt/cert-issuer  certificate-issuer configuration
 # /mnt/crowdsec     crowdsec credentials
 # /mnt/ic-gateway   ic-gateway configuration and certificates
 # /mnt/ic-http-lb   ic-http-lb configuration and certificates
