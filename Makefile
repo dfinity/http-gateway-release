@@ -48,12 +48,6 @@ ic-http-lb:
 	@echo "$(shell jq '.["ic-http-lb"].sha256' refs.json)  $(BIN_DIR)/ic-http-lb" | shasum -c
 	@sleep 1
 
-certificate-issuer:
-	curl -fsSL --retry 15 --retry-max-time 180 --retry-all-errors -o $(BIN_DIR)/certificate-issuer.gz $(shell jq '.["certificate-issuer"].url' refs.json)
-	@echo "$(shell jq -r '.["certificate-issuer"].sha256' refs.json)  $(BIN_DIR)/certificate-issuer.gz" | shasum -c
-	@gunzip $(BIN_DIR)/certificate-issuer.gz
-	@sleep 1
-
 vector:
 	curl -fsSL --retry 15 --retry-max-time 180 --retry-all-errors -o $(BIN_DIR)/vector.tar.gz $(shell jq '.["vector"].url' refs.json)
 	@echo "$(shell jq '.["vector"].sha256' refs.json)  $(BIN_DIR)/vector.tar.gz" | shasum -c
@@ -66,7 +60,7 @@ node_exporter:
 	@tar -xzf $(BIN_DIR)/node_exporter.tar.gz -C $(BIN_DIR) --strip-components=1 --wildcards '*/node_exporter'
 	@sleep 1
 
-guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway ic-http-lb certificate-issuer vector node_exporter
+guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway ic-http-lb vector node_exporter
 
 # Initram disk
 

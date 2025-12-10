@@ -22,7 +22,6 @@ A custom initramfs image that includes:
 
 - `ic-gateway` from the [ic-gateway repository](https://github.com/dfinity/ic-gateway)
 - `ic-http-lb` from the [ic-http-lb repository](https://github.com/dfinity/ic-http-lb)
-- `certificate-issuer` for custom domain support from the [main IC repository](https://github.com/dfinity/ic/tree/master/rs/boundary_node/certificate_issuance/certificate_issuer)
 - `vector` for logging
 - `node-exporter` for system-level metrics
 - `runit` a lightweight init system and service supervisor
