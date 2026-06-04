@@ -4,8 +4,8 @@
     "sha256": "a95b6b1e0fd8c0b6f9d417c9307fd5643a942762475565b7e30dbc63c0622947"
   },
   "ic-http-lb": {
-    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/417677978",
-    "sha256": "40c5d9d03489dfaa65325b433bc4acd2edfe642205ae2888c2975d969d8aeeca"
+    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/438286591",
+    "sha256": "161ff5c6cc9fc9d2df6091e3b8ae63e1bb60f9710b639be8c7fc3866b9b78005"
   },
   "linux-image": {
     "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-4ee82fb/linux-image-6.13.0-snp-guest-ffd294d_6.13.0-1_amd64.deb",
