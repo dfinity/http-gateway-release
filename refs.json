@@ -1,7 +1,7 @@
 {
   "ic-gateway": {
-    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/465575860",
-    "sha256": "efa2e4cb97c89a1f1f681f0f34968b2f519c8c548005ed4a88715cb17e097328"
+    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/488433320",
+    "sha256": "b502f994b119d9031d4febe2fe827a2427a94e5a3f1b2b26a196cec37472732d"
   },
   "ic-http-lb": {
     "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/477866637",
