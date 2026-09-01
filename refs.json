@@ -1,11 +1,11 @@
 {
   "ic-gateway": {
-    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/532028837",
-    "sha256": "a5215711a5cc70ae0bd6d6f1b16467314102cc9a8722c6b6b4b90d406b82cfdd"
+    "url": "https://api.github.com/repos/dfinity/ic-gateway/releases/assets/539370732",
+    "sha256": "9f65198adfc96accff9dfc169d987c67789036623f171cb42d8f6f58355fc07b"
   },
   "ic-http-lb": {
-    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/522212447",
-    "sha256": "a6f312fcb0fd116be20ab53a58df9b8932466eb5a190289cfbc1b63a146d652c"
+    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/539361762",
+    "sha256": "c99ab62c760d530604fa1320a90b9cdde1821dec5a05570c1a7b36c7163e3b10"
   },
   "linux-image": {
     "url": "https://github.com/dfinity/sev-snp-deps/releases/download/kernel-guest-4ee82fb/linux-image-6.13.0-snp-guest-ffd294d_6.13.0-1_amd64.deb",
