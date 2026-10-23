@@ -5,6 +5,10 @@ mkdir /dev/pts && mount -t devpts devpts /dev/pts
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
+# Load kernel modules for present devices (Debian kernel ships drivers as modules)
+find /sys/devices -name modalias -exec cat {} + | sort -u | xargs modprobe -abq
+modprobe sd_mod
+
 mnts=("/dev/sda /mnt")
 
 # /mnt/crowdsec     crowdsec credentials
@@ -25,6 +29,8 @@ for v in "${mnts[@]}"; do
   IFS=' ' read -r dvc mnt <<< $v
 
   echo "Mounting $dvc at $mnt"
+  # Wait for the device to appear, disks are probed asynchronously
+  for _ in $(seq 50); do [ -b $dvc ] && break; sleep 0.1; done
   mkdir -p $mnt && mount $dvc $mnt
 done
 
