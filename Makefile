@@ -73,7 +73,7 @@ rootfs: builder
 	$(SUDO) chown -R root:root rootfs
 	$(SUDO) touch -d @0 rootfs
 
-	cp rootfs/boot/vmlinuz-* $(DEPS_DIR)/vmlinuz
+	$(SUDO) sh -c 'cp rootfs/boot/vmlinuz-* $(DEPS_DIR)/vmlinuz'
 
 initramfs: clean guest-dependencies rootfs
 	$(SUDO) sh -c '\
