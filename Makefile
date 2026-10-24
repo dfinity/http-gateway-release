@@ -28,16 +28,6 @@ ovmf:
 	@echo "$(shell jq '.["ovmf"].sha256' refs.json)  $(DEPS_DIR)/OVMF.fd" | shasum -c
 	@sleep 1
 
-vmlinuz:
-	curl -fsSL --retry 15 --retry-max-time 180 --retry-all-errors -o $(DEPS_DIR)/vmlinuz $(shell jq '.["vmlinuz"].url' refs.json)
-	@echo "$(shell jq '.["vmlinuz"].sha256' refs.json)  $(DEPS_DIR)/vmlinuz" | shasum -c
-	@sleep 1
-
-linux-image:
-	curl -fsSL --retry 15 --retry-max-time 180 --retry-all-errors -o $(DEPS_DIR)/linux-image.deb $(shell jq '.["linux-image"].url' refs.json)
-	@echo "$(shell jq '.["linux-image"].sha256' refs.json)  $(DEPS_DIR)/linux-image.deb" | shasum -c
-	@sleep 1
-
 ic-gateway:
 	curl -fsSL --retry 15 --retry-max-time 180 --retry-all-errors -H "Accept: application/octet-stream" -o $(BIN_DIR)/ic-gateway $(shell jq '.["ic-gateway"].url' refs.json)
 	@echo "$(shell jq '.["ic-gateway"].sha256' refs.json)  $(BIN_DIR)/ic-gateway" | shasum -c
@@ -60,7 +50,7 @@ node_exporter:
 	@tar -xzf $(BIN_DIR)/node_exporter.tar.gz -C $(BIN_DIR) --strip-components=1 --wildcards '*/node_exporter'
 	@sleep 1
 
-guest-dependencies: dirs ovmf vmlinuz linux-image ic-gateway ic-http-lb vector node_exporter
+guest-dependencies: dirs ovmf ic-gateway ic-http-lb vector node_exporter
 
 # Initram disk
 
@@ -82,6 +72,8 @@ rootfs: builder
 
 	$(SUDO) chown -R root:root rootfs
 	$(SUDO) touch -d @0 rootfs
+
+	$(SUDO) sh -c 'cp rootfs/boot/vmlinuz-* $(DEPS_DIR)/vmlinuz'
 
 initramfs: clean guest-dependencies rootfs
 	$(SUDO) sh -c '\
