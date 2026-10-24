@@ -5,9 +5,13 @@ mkdir /dev/pts && mount -t devpts devpts /dev/pts
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
-# Load kernel modules for present devices (Debian kernel ships drivers as modules)
-find /sys/devices -name modalias -exec cat {} + | sort -u | xargs modprobe -abq
-modprobe sd_mod
+# Load kernel modules (Debian kernel ships these drivers as modules)
+modprobe -a virtio_net virtio_scsi sd_mod
+
+# The SEV-SNP guest device only exists when running under SEV-SNP
+if [ -d /sys/devices/platform/sev-guest ]; then
+  modprobe sev-guest
+fi
 
 mnts=("/dev/sda /mnt")
 
