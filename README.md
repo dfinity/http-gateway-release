@@ -28,11 +28,11 @@ A custom initramfs image that includes:
 
 ### `vmlinuz`
 
-- Linux kernel image, sourced from the [SEV-SNP dependencies repository](https://github.com/dfinity/sev-snp-deps)
+- Linux kernel image from the official Debian [`linux-image-cloud-amd64`](https://packages.debian.org/trixie/linux-image-cloud-amd64) package, pinned to the [snapshot.debian.org](https://snapshot.debian.org) timestamp set in the `Dockerfile`
 
 ### `OVMF.fd`
 
-- UEFI firmware file for booting in a virtualized environment, also sourced from the [SEV-SNP dependencies repository](https://github.com/dfinity/sev-snp-deps)
+- UEFI firmware file for booting in a virtualized environment, sourced from the [SEV-SNP dependencies repository](https://github.com/dfinity/sev-snp-deps)
 
 ## Remote Attestation of SEV-SNP-enabled HTTP Gateways
 

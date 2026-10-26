@@ -5,6 +5,14 @@ mkdir /dev/pts && mount -t devpts devpts /dev/pts
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
+# Load kernel modules (Debian kernel ships these drivers as modules)
+modprobe -a virtio_net virtio_scsi sd_mod
+
+# The SEV-SNP guest device only exists when running under SEV-SNP
+if [ -d /sys/devices/platform/sev-guest ]; then
+  modprobe sev-guest
+fi
+
 mnts=("/dev/sda /mnt")
 
 # /mnt/crowdsec     crowdsec credentials
@@ -25,6 +33,8 @@ for v in "${mnts[@]}"; do
   IFS=' ' read -r dvc mnt <<< $v
 
   echo "Mounting $dvc at $mnt"
+  # Wait for the device to appear, disks are probed asynchronously
+  for _ in $(seq 50); do [ -b $dvc ] && break; sleep 0.1; done
   mkdir -p $mnt && mount $dvc $mnt
 done
 
