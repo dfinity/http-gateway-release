@@ -1,7 +1,8 @@
 SUDO := $(shell [ $(shell id -u) -ne 0 ] && echo sudo)
 
-DEPS_DIR = deps
-BIN_DIR  = bin
+DEPS_DIR  = deps
+BIN_DIR   = bin
+INITRAMFS = initramfs.cpio.xz
 
 all: initramfs
 
@@ -16,7 +17,7 @@ clean:
 	$(SUDO) rm -rf $(BIN_DIR)
 
 	@echo "Removing artifacts"
-	$(SUDO) rm -rf initramfs.cpio.gz rootfs
+	$(SUDO) rm -rf $(INITRAMFS) rootfs
 
 # Guest Dependencies
 
@@ -61,6 +62,8 @@ builder:
 		--platform linux/amd64 \
 		--driver docker-container
 
+# The kernel is released as a separate artifact, so move it out of the image.
+# Moving it bumps the mtime of boot/, which ends up in the archive, so reset it.
 .PHONY: rootfs
 rootfs: builder
 	docker buildx build \
@@ -71,18 +74,19 @@ rootfs: builder
 			.
 
 	$(SUDO) chown -R root:root rootfs
-	$(SUDO) touch -d @0 rootfs
+	$(SUDO) sh -c 'mv rootfs/boot/vmlinuz-* $(DEPS_DIR)/vmlinuz'
+	$(SUDO) touch -d @0 rootfs rootfs/boot
 
-	$(SUDO) sh -c 'cp rootfs/boot/vmlinuz-* $(DEPS_DIR)/vmlinuz'
-
+# The kernel's XZ decoder only supports CRC32 checks (xz defaults to CRC64), and
+# a single thread produces a single-block stream that keeps the output reproducible.
 initramfs: clean guest-dependencies rootfs
 	$(SUDO) sh -c '\
 		cd rootfs && \
 		find . \
 			| LC_ALL=C sort \
 			| cpio -o --reproducible -H newc \
-			| gzip \
-		> ../initramfs.cpio.gz && \
+			| xz -9 --check=crc32 --threads=1 \
+		> ../$(INITRAMFS) && \
 		cd .. \
 	'
 
@@ -98,5 +102,5 @@ sev-snp-measure: pip-sev-snp-measure
   		--vcpu-stepping=1 \
 		--ovmf="$(DEPS_DIR)/OVMF.fd" \
 		--kernel="$(DEPS_DIR)/vmlinuz" \
-		--initrd='initramfs.cpio.gz' \
+		--initrd='$(INITRAMFS)' \
 		--append='console=ttyS0,115200n8'

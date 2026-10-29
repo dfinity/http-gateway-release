@@ -81,7 +81,7 @@ the workload (kernel, initramfs, OVMF, etc.).
 Get the latest release from this [repository](https://github.com/dfinity/http-gateway-release/releases/latest) and download the following files:
 * `OVMF.fd` (BIOS)
 * `vmlinuz` (Linux kernel)
-* `initramfs.cpio.gz` (Initramfs)
+* `initramfs.cpio.xz` (Initramfs)
 
 ### Install `sev-snp-measure`
 
@@ -100,7 +100,7 @@ sev-snp-measure \
   --vcpu-stepping=1 \
   --ovmf OVMF.fd \
   --kernel vmlinuz \
-  --initrd initramfs.cpio.gz \
+  --initrd initramfs.cpio.xz \
   --append='console=ttyS0,115200n8'
 ```
 
