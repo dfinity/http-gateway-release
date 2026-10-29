@@ -30,7 +30,7 @@ jobs:
 
       - name: Calculate artifact checksums
         run: |
-          echo "INITRAMFS_SHASUM=$(sha256sum initramfs.cpio.gz | cut -d' ' -f1)" >> $GITHUB_ENV
+          echo "INITRAMFS_SHASUM=$(sha256sum initramfs.cpio.xz | cut -d' ' -f1)" >> $GITHUB_ENV
           echo "VMLINUZ_SHASUM=$(sha256sum deps/vmlinuz | cut -d' ' -f1)" >> $GITHUB_ENV
           echo "OVMF_SHASUM=$(sha256sum deps/OVMF.fd | cut -d' ' -f1)" >> $GITHUB_ENV
         shell: bash
@@ -42,7 +42,7 @@ jobs:
           files: |
             deps/OVMF.fd
             deps/vmlinuz
-            initramfs.cpio.gz
+            initramfs.cpio.xz
           body: |
             | Name | Value |
             | ------------- | ------------- |
@@ -52,7 +52,7 @@ jobs:
             ### Artifact Hashes
             | Artifact | Checksum |
             | ------------- | ------------- |
-            | initramfs.cpio.gz | `${{ env.INITRAMFS_SHASUM }}` |
+            | initramfs.cpio.xz | `${{ env.INITRAMFS_SHASUM }}` |
             | OVMF.fd | `${{ env.OVMF_SHASUM }}` |
             | vmlinuz | `${{ env.VMLINUZ_SHASUM }}` |
 
