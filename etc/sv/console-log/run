@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Forward the logs that svlogd writes for every service with a log/ dir to the console
+FILES=''
+for d in /etc/sv/*/log; do
+    LOG_DIR="/var/log/$(basename "$(dirname "$d")")"
+    # Create the dir up front so that tail can watch it
+    mkdir -p "$LOG_DIR"
+    FILES="$FILES $LOG_DIR/current"
+done
+
+# -F retries the files that don't exist yet and follows them across svlogd rotations,
+# its notices about that go to stderr and are dropped
+exec chpst -uroot tail -q -n +1 -F $FILES 2>/dev/null
