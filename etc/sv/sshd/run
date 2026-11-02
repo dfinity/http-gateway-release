@@ -11,6 +11,20 @@ if [ -f /mnt/sshd/authorized_keys ]; then
     cp /mnt/sshd/authorized_keys /root/.ssh/
 fi
 
+# Host keys aren't part of the image: use the ones from the config disk,
+# otherwise generate them (ssh-keygen -A only creates missing ones, so they're kept across restarts)
+if ls /mnt/sshd/ssh_host_*_key >/dev/null 2>&1; then
+    cp /mnt/sshd/ssh_host_* /etc/ssh/
+    chmod 600 /etc/ssh/ssh_host_*_key
+else
+    ssh-keygen -A
+fi
+
+# Log the fingerprints, they reach the console through svlogd and console-log
+for k in /etc/ssh/ssh_host_*_key; do
+    ssh-keygen -lf "$k"
+done
+
 # Disable StrictModes
 sed -i "s|#StrictModes yes|StrictModes no|g" $CFG
 
