@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 
-# https://snapshot.debian.org/archive/debian/20261020T202723Z/
-ARG SNAPSHOT=20261020T202723Z
+# https://snapshot.debian.org/archive/debian/20261101T204059Z/
+ARG SNAPSHOT=20261101T204059Z
 
-FROM debian:trixie-20261020-slim AS base
+FROM debian:trixie-20261027-slim AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 
