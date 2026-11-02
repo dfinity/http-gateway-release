@@ -8,6 +8,7 @@ fi
 
 # Import authorized keys
 if [ -f /mnt/sshd/authorized_keys ]; then
+    mkdir -p -m 700 /root/.ssh
     cp /mnt/sshd/authorized_keys /root/.ssh/
 fi
 
