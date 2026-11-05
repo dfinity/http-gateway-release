@@ -14,10 +14,6 @@
   "sev-snp-measure": {
     "url": "git+https://github.com/virtee/sev-snp-measure.git@ec2e0e2543940ae6e10ac9ad7fad92db0e3181f6"
   },
-  "vector": {
-    "url": "https://github.com/vectordotdev/vector/releases/download/v0.45.0/vector-0.45.0-x86_64-unknown-linux-gnu.tar.gz",
-    "sha256": "2d1076c4484222edd9bd1f566b3d395428cd7c934579f8f0301d04371c178e57"
-  },
   "node_exporter": {
     "url": "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz",
     "sha256": "e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"

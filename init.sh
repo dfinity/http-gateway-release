@@ -20,7 +20,7 @@ mnts=("/dev/sda /mnt")
 # /mnt/ic-http-lb   ic-http-lb configuration and certificates
 # /mnt/networking   networking configuration
 # /mnt/nftables     nftables definitions
-# /mnt/sshd         sshd authorized keys
+# /mnt/sshd         sshd authorized keys and host keys (optional, generated if missing)
 
 # Configure network (local)
 ip link set lo up
