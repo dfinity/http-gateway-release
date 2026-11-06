@@ -31,6 +31,23 @@ COPY bin/node_exporter /node_exporter
 RUN strip /node_exporter
 
 
+# OVMF built for AMD SEV-SNP is only packaged since Debian Forky (which isn't stable as of November 2026).
+
+FROM debian:forky-20261027-slim AS ovmf
+
+ARG SNAPSHOT
+
+RUN \
+  --mount=type=cache,id=apt-cache-forky,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,id=apt-lib-forky,target=/var/lib/apt,sharing=locked \
+  : "Enabling snapshot" && \
+  sed -i -e '/Types: deb/ a\Snapshot: true' /etc/apt/sources.list.d/debian.sources && \
+  : "Enabling cache" && \
+  rm -f /etc/apt/apt.conf.d/docker-clean && \
+  echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' >/etc/apt/apt.conf.d/keep-cache && \
+  apt install --update --snapshot "${SNAPSHOT}" -o Acquire::Check-Valid-Until=false -o Acquire::https::Verify-Peer=false -y --no-install-recommends ovmf-amdsev
+
+
 FROM base
 
 ARG SNAPSHOT
@@ -100,6 +117,11 @@ RUN \
 COPY --chmod=755 bin/ic-gateway /usr/bin/ic-gateway
 COPY --chmod=755 bin/ic-http-lb /usr/bin/ic-http-lb
 COPY --chmod=755 --from=strip /node_exporter /usr/bin/node_exporter
+
+
+# firmware, moved out of the image by the Makefile like the kernel
+
+COPY --from=ovmf /usr/share/ovmf/OVMF.amdsev.fd /boot/OVMF.fd
 
 
 # crowdsec
