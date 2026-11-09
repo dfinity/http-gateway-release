@@ -32,7 +32,7 @@ A custom initramfs image that includes:
 
 ### `OVMF.fd`
 
-- UEFI firmware file for booting in a virtualized environment, sourced from the [SEV-SNP dependencies repository](https://github.com/dfinity/sev-snp-deps)
+- UEFI firmware file for booting in a virtualized environment: the AMD SEV-SNP build of OVMF (`OVMF.amdsev.fd`) from the official Debian [`ovmf-amdsev`](https://packages.debian.org/forky/ovmf-amdsev) package, pinned to the same [snapshot.debian.org](https://snapshot.debian.org) timestamp as the kernel
 
 ## Remote Attestation of SEV-SNP-enabled HTTP Gateways
 

@@ -7,12 +7,8 @@
     "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/544206078",
     "sha256": "c52d6a5e1251072992a115bfbd73279670138efdb7327bd869ede9c7193866c9"
   },
-  "ovmf": {
-    "url": "https://github.com/dfinity/sev-snp-deps/releases/download/ovmf-9bb0a92/OVMF.fd",
-    "sha256": "c560d8ae5fc252fe89fb4db04b21d4c5d3c90d01c67446352179e5f9a53a0c82"
-  },
   "sev-snp-measure": {
-    "url": "git+https://github.com/virtee/sev-snp-measure.git@ec2e0e2543940ae6e10ac9ad7fad92db0e3181f6"
+    "url": "git+https://github.com/virtee/sev-snp-measure.git@5b6a79e86641a7ca1a377ba1848d1dcdc2498494"
   },
   "node_exporter": {
     "url": "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz",

@@ -24,11 +24,6 @@ clean:
 dirs:
 	mkdir -p $(DEPS_DIR) $(BIN_DIR)
 
-ovmf:
-	curl -fsSL --retry 15 --retry-max-time 180 --retry-all-errors -o $(DEPS_DIR)/OVMF.fd $(shell jq '.["ovmf"].url' refs.json)
-	@echo "$(shell jq '.["ovmf"].sha256' refs.json)  $(DEPS_DIR)/OVMF.fd" | shasum -c
-	@sleep 1
-
 ic-gateway:
 	curl -fsSL --retry 15 --retry-max-time 180 --retry-all-errors -H "Accept: application/octet-stream" -o $(BIN_DIR)/ic-gateway $(shell jq '.["ic-gateway"].url' refs.json)
 	@echo "$(shell jq '.["ic-gateway"].sha256' refs.json)  $(BIN_DIR)/ic-gateway" | shasum -c
@@ -45,7 +40,7 @@ node_exporter:
 	@tar -xzf $(BIN_DIR)/node_exporter.tar.gz -C $(BIN_DIR) --strip-components=1 --wildcards '*/node_exporter'
 	@sleep 1
 
-guest-dependencies: dirs ovmf ic-gateway ic-http-lb node_exporter
+guest-dependencies: dirs ic-gateway ic-http-lb node_exporter
 
 # Initram disk
 
@@ -56,8 +51,8 @@ builder:
 		--platform linux/amd64 \
 		--driver docker-container
 
-# The kernel is released as a separate artifact, so move it out of the image.
-# Moving it bumps the mtime of boot/, which ends up in the archive, so reset it.
+# The kernel and the firmware are released as separate artifacts, so move them out of the image.
+# Moving them bumps the mtime of boot/, which ends up in the archive, so reset it.
 .PHONY: rootfs
 rootfs: builder
 	docker buildx build \
@@ -69,6 +64,7 @@ rootfs: builder
 
 	$(SUDO) chown -R root:root rootfs
 	$(SUDO) sh -c 'mv rootfs/boot/vmlinuz-* $(DEPS_DIR)/vmlinuz'
+	$(SUDO) sh -c 'mv rootfs/boot/OVMF.fd $(DEPS_DIR)/OVMF.fd'
 	$(SUDO) touch -d @0 rootfs rootfs/boot
 
 # The kernel's XZ decoder only supports CRC32 checks (xz defaults to CRC64), and
