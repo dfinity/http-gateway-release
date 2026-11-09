@@ -4,8 +4,8 @@
     "sha256": "6611a48378ffa3ab60871cbbf6b1567762aa07ef5cdb8e393936f77a3863f587"
   },
   "ic-http-lb": {
-    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/544206078",
-    "sha256": "c52d6a5e1251072992a115bfbd73279670138efdb7327bd869ede9c7193866c9"
+    "url": "https://api.github.com/repos/dfinity/ic-http-lb/releases/assets/727197591",
+    "sha256": "449c078a9348993a194350e8ae653399866d864187acc1cef42ae65f2f2f0746"
   },
   "sev-snp-measure": {
     "url": "git+https://github.com/virtee/sev-snp-measure.git@5b6a79e86641a7ca1a377ba1848d1dcdc2498494"
