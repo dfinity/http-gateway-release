@@ -53,6 +53,8 @@ builder:
 
 # The kernel and the firmware are released as separate artifacts, so move them out of the image.
 # Moving them bumps the mtime of boot/, which ends up in the archive, so reset it.
+# BuildKit creates the export dir with mode 0700, and its mode becomes the mode of / in the VM.
+# Make it 0755, otherwise non-root users can't access anything (e.g. chronyd running as _chrony can't read /etc/resolv.conf).
 .PHONY: rootfs
 rootfs: builder
 	docker buildx build \
@@ -63,6 +65,7 @@ rootfs: builder
 			.
 
 	$(SUDO) chown -R root:root rootfs
+	$(SUDO) chmod 755 rootfs
 	$(SUDO) sh -c 'mv rootfs/boot/vmlinuz-* $(DEPS_DIR)/vmlinuz'
 	$(SUDO) sh -c 'mv rootfs/boot/OVMF.fd $(DEPS_DIR)/OVMF.fd'
 	$(SUDO) touch -d @0 rootfs rootfs/boot

@@ -1,3 +1,4 @@
 #!/bin/sh
 
+chown _chrony:_chrony /var/lib/chrony
 exec chpst -uroot /usr/sbin/chronyd -d 2>&1
