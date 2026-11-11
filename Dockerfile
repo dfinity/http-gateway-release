@@ -149,6 +149,8 @@ COPY etc/sv /etc/sv
 
 # misc
 COPY etc/hosts /etc/hosts
+COPY etc/resolv.conf /etc/resolv.conf
+COPY etc/chrony/chrony.conf /etc/chrony/chrony.conf
 
 # init
 
