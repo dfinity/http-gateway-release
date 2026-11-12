@@ -1,0 +1,37 @@
+#!/bin/sh
+exec 2>&1
+
+# Publishes chrony's state as Prometheus metrics through node_exporter's textfile collector
+
+DIR='/run/node_exporter'
+OUT="${DIR}/chrony.prom"
+WORK='/run/chrony-metrics'
+INTERVAL=15
+
+mkdir -p "$DIR" "$WORK"
+
+# Only use the Unix socket, so that a stopped chronyd fails fast instead of timing out over UDP
+CHRONYC='chronyc -h /run/chrony/chronyd.sock -c'
+
+while :; do
+    # -N prints the source names from the config, -n their addresses. Both list the sources
+    # in the same order, the awk script joins them by position.
+    # Every command runs even if chronyd is down, so that no stale output is left behind.
+    $CHRONYC -N tracking >"${WORK}/tracking" 2>/dev/null
+    $CHRONYC -N sources >"${WORK}/sources.names" 2>/dev/null
+    $CHRONYC -n sources >"${WORK}/sources.addrs" 2>/dev/null
+    $CHRONYC -N authdata >"${WORK}/authdata.names" 2>/dev/null
+    $CHRONYC -n authdata >"${WORK}/authdata.addrs" 2>/dev/null
+
+    # Write to a file that doesn't match *.prom and rename it, so a scrape never sees a partial file
+    TMP=$(mktemp "${OUT}.XXXXXX")
+    awk -f /etc/sv/chrony-metrics/chrony-metrics.awk \
+        "${WORK}/tracking" \
+        "${WORK}/sources.names" "${WORK}/sources.addrs" \
+        "${WORK}/authdata.names" "${WORK}/authdata.addrs" \
+        >"$TMP"
+    chmod 644 "$TMP"
+    mv "$TMP" "$OUT"
+
+    sleep $INTERVAL
+done
