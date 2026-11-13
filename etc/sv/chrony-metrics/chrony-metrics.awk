@@ -50,12 +50,13 @@ FILENAME ~ /\/tracking$/ && NF == 14 {
     next
 }
 
-FILENAME ~ /\/sources\.names$/ { source_name[FNR] = $3; next }
+# Address, source name from the config
+FILENAME ~ /\/names$/ { name_of[$1] = $2; next }
 
 # Mode, state, address, stratum, poll (log2), reachability (octal), last sample age,
 # adjusted offset, measured offset, error bound
-FILENAME ~ /\/sources\.addrs$/ && NF == 10 {
-    name = (FNR in source_name) ? source_name[FNR] : $3
+FILENAME ~ /\/sources$/ && NF == 10 {
+    name = ($3 in name_of) ? name_of[$3] : $3
     l = "source=\"" clean(name) "\",address=\"" clean($3) "\""
 
     mode = "unknown"
@@ -82,12 +83,10 @@ FILENAME ~ /\/sources\.addrs$/ && NF == 10 {
     next
 }
 
-FILENAME ~ /\/authdata\.names$/ { auth_name[FNR] = $1; next }
-
 # Address, mode, key ID, key type, key length, last NTS-KE age, NTS-KE attempts, NAK,
 # cookies, cookie length
-FILENAME ~ /\/authdata\.addrs$/ && NF == 10 {
-    name = (FNR in auth_name) ? auth_name[FNR] : $1
+FILENAME ~ /\/authdata$/ && NF == 10 {
+    name = ($1 in name_of) ? name_of[$1] : $1
     l = "source=\"" clean(name) "\",address=\"" clean($1) "\""
 
     mode = "none"
