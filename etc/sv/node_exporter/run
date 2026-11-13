@@ -1,3 +1,6 @@
 #!/bin/sh
 exec 2>&1
-exec chpst -uroot /usr/bin/node_exporter
+
+# chrony-metrics writes *.prom files here, the textfile collector reads them at every scrape
+mkdir -p /run/node_exporter
+exec chpst -uroot /usr/bin/node_exporter --collector.textfile.directory=/run/node_exporter

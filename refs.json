@@ -11,7 +11,7 @@
     "url": "git+https://github.com/virtee/sev-snp-measure.git@5b6a79e86641a7ca1a377ba1848d1dcdc2498494"
   },
   "node_exporter": {
-    "url": "https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz",
-    "sha256": "e7b65ea30eec77180487d518081d3dcb121b975f6d95f1866dfb9156c5b24075"
+    "url": "https://github.com/prometheus/node_exporter/releases/download/v1.12.1/node_exporter-1.12.1.linux-amd64.tar.gz",
+    "sha256": "b51d8a76aa2a9156a55d501aca6276fae09e262259a5e4e831d2c2222f084e63"
   }
 }
